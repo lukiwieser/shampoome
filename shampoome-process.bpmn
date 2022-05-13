@@ -22,6 +22,7 @@
       </bpmn:lane>
       <bpmn:lane id="Lane_0tjualp" name="Quality Assurance">
         <bpmn:flowNodeRef>Activity_1dk7qxn</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_1ijil7t</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0kmp8oo" name="Delivery Department">
         <bpmn:flowNodeRef>Activity_10oy4l1</bpmn:flowNodeRef>
@@ -47,11 +48,6 @@
     <bpmn:endEvent id="Event_0ykzzyk">
       <bpmn:incoming>Flow_1dvloj7</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:exclusiveGateway id="Gateway_1mjvapv">
-      <bpmn:incoming>Flow_033dxl3</bpmn:incoming>
-      <bpmn:incoming>Flow_0eb9kft</bpmn:incoming>
-      <bpmn:outgoing>Flow_06t3mxi</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
     <bpmn:eventBasedGateway id="Gateway_053wyph">
       <bpmn:incoming>Flow_0toq84y</bpmn:incoming>
       <bpmn:outgoing>Flow_0yngzh8</bpmn:outgoing>
@@ -133,7 +129,6 @@
     </bpmn:intermediateCatchEvent>
     <bpmn:sequenceFlow id="Flow_06t3mxi" sourceRef="Gateway_1mjvapv" targetRef="Activity_0pdy729" />
     <bpmn:sequenceFlow id="Flow_09hz2hr" sourceRef="Activity_0pdy729" targetRef="Activity_1dk7qxn" />
-    <bpmn:sequenceFlow id="Flow_03ps91s" sourceRef="Activity_1dk7qxn" targetRef="Activity_0q8udb3" />
     <bpmn:sequenceFlow id="Flow_09ka93r" sourceRef="Activity_1n22hq8" targetRef="Activity_1mgerax" />
     <bpmn:sequenceFlow id="Flow_0kwu12r" sourceRef="Event_02qpm14" targetRef="Activity_0herklh" />
     <bpmn:sequenceFlow id="Flow_1s0ei24" sourceRef="Activity_0uoqeux" targetRef="Event_0tfewsv" />
@@ -191,20 +186,8 @@
       </bpmn:dataOutputAssociation>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1e7wz1o" messageRef="Message_1ovsh6t" />
     </bpmn:startEvent>
-    <bpmn:task id="Activity_0pdy729" name="Produce the Shampoo">
-      <bpmn:incoming>Flow_06t3mxi</bpmn:incoming>
-      <bpmn:outgoing>Flow_09hz2hr</bpmn:outgoing>
-      <bpmn:property id="Property_05i3ewz" name="__targetRef_placeholder" />
-      <bpmn:dataInputAssociation id="DataInputAssociation_0ybyvhw">
-        <bpmn:sourceRef>DataObjectReference_1nv7k5g</bpmn:sourceRef>
-        <bpmn:targetRef>Property_05i3ewz</bpmn:targetRef>
-      </bpmn:dataInputAssociation>
-      <bpmn:dataOutputAssociation id="DataOutputAssociation_0v714zs">
-        <bpmn:targetRef>DataObjectReference_027dlan</bpmn:targetRef>
-      </bpmn:dataOutputAssociation>
-    </bpmn:task>
     <bpmn:task id="Activity_0q8udb3" name="Deliver shampoo">
-      <bpmn:incoming>Flow_03ps91s</bpmn:incoming>
+      <bpmn:incoming>Flow_13wge37</bpmn:incoming>
       <bpmn:outgoing>Flow_1y84usf</bpmn:outgoing>
       <bpmn:property id="Property_01hnrpv" name="__targetRef_placeholder" />
       <bpmn:dataInputAssociation id="DataInputAssociation_1nu5h5c">
@@ -217,8 +200,9 @@
       <bpmn:errorEventDefinition id="ErrorEventDefinition_0e0efqs" />
     </bpmn:boundaryEvent>
     <bpmn:userTask id="Activity_1dk7qxn" name="Perfrom the Quality Check" camunda:formRef="quality-check-form" camunda:formRefBinding="deployment" camunda:assignee="demo">
+      <bpmn:extensionElements />
       <bpmn:incoming>Flow_09hz2hr</bpmn:incoming>
-      <bpmn:outgoing>Flow_03ps91s</bpmn:outgoing>
+      <bpmn:outgoing>Flow_08292us</bpmn:outgoing>
       <bpmn:property id="Property_1c1etsv" name="__targetRef_placeholder" />
       <bpmn:dataInputAssociation id="DataInputAssociation_18q9zo1">
         <bpmn:sourceRef>DataObjectReference_027dlan</bpmn:sourceRef>
@@ -228,6 +212,36 @@
         <bpmn:targetRef>DataStoreReference_0832wiv</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:userTask>
+    <bpmn:exclusiveGateway id="Gateway_1ijil7t" name="Quality is okay?">
+      <bpmn:incoming>Flow_08292us</bpmn:incoming>
+      <bpmn:outgoing>Flow_13wge37</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1066o06</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_08292us" sourceRef="Activity_1dk7qxn" targetRef="Gateway_1ijil7t" />
+    <bpmn:sequenceFlow id="Flow_13wge37" name="Yes" sourceRef="Gateway_1ijil7t" targetRef="Activity_0q8udb3">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{isQualityOk}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1066o06" name="No" sourceRef="Gateway_1ijil7t" targetRef="Gateway_1mjvapv">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{not isQualityOk}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:exclusiveGateway id="Gateway_1mjvapv">
+      <bpmn:incoming>Flow_033dxl3</bpmn:incoming>
+      <bpmn:incoming>Flow_1066o06</bpmn:incoming>
+      <bpmn:incoming>Flow_0eb9kft</bpmn:incoming>
+      <bpmn:outgoing>Flow_06t3mxi</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Activity_0pdy729" name="Produce the Shampoo">
+      <bpmn:incoming>Flow_06t3mxi</bpmn:incoming>
+      <bpmn:outgoing>Flow_09hz2hr</bpmn:outgoing>
+      <bpmn:property id="Property_0sux3c1" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_0ybyvhw">
+        <bpmn:sourceRef>DataObjectReference_1nv7k5g</bpmn:sourceRef>
+        <bpmn:targetRef>Property_0sux3c1</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0v714zs">
+        <bpmn:targetRef>DataObjectReference_027dlan</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:task>
     <bpmn:textAnnotation id="TextAnnotation_028pgrg">
       <bpmn:text>KPI: Ressource Allocation</bpmn:text>
     </bpmn:textAnnotation>
@@ -347,12 +361,6 @@
         <di:waypoint x="500" y="230" />
         <di:waypoint x="570" y="230" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_03ps91s_di" bpmnElement="Flow_03ps91s">
-        <di:waypoint x="1600" y="600" />
-        <di:waypoint x="1680" y="600" />
-        <di:waypoint x="1680" y="730" />
-        <di:waypoint x="1730" y="730" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_09hz2hr_di" bpmnElement="Flow_09hz2hr">
         <di:waypoint x="1430" y="470" />
         <di:waypoint x="1460" y="470" />
@@ -362,6 +370,27 @@
       <bpmndi:BPMNEdge id="Flow_06t3mxi_di" bpmnElement="Flow_06t3mxi">
         <di:waypoint x="1285" y="470" />
         <di:waypoint x="1330" y="470" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_08292us_di" bpmnElement="Flow_08292us">
+        <di:waypoint x="1600" y="600" />
+        <di:waypoint x="1645" y="600" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13wge37_di" bpmnElement="Flow_13wge37">
+        <di:waypoint x="1670" y="625" />
+        <di:waypoint x="1670" y="730" />
+        <di:waypoint x="1730" y="730" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1671" y="633" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1066o06_di" bpmnElement="Flow_1066o06">
+        <di:waypoint x="1670" y="575" />
+        <di:waypoint x="1670" y="400" />
+        <di:waypoint x="1260" y="400" />
+        <di:waypoint x="1260" y="445" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1672" y="553" width="15" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_0gdvdy0_di" bpmnElement="Event_0s3k7lu">
         <dc:Bounds x="852" y="312" width="36" height="36" />
@@ -478,6 +507,9 @@
       <bpmndi:BPMNShape id="Activity_0k7qqzk_di" bpmnElement="Activity_0q8udb3">
         <dc:Bounds x="1730" y="690" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_148ce0b_di" bpmnElement="Activity_1dk7qxn">
+        <dc:Bounds x="1500" y="560" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_028pgrg_di" bpmnElement="TextAnnotation_028pgrg">
         <dc:Bounds x="1330" y="600" width="100" height="40" />
       </bpmndi:BPMNShape>
@@ -487,8 +519,11 @@
       <bpmndi:BPMNShape id="TextAnnotation_0dcts0e_di" bpmnElement="TextAnnotation_0dcts0e">
         <dc:Bounds x="2650" y="1010" width="100" height="40" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_148ce0b_di" bpmnElement="Activity_1dk7qxn">
-        <dc:Bounds x="1500" y="560" width="100" height="80" />
+      <bpmndi:BPMNShape id="Gateway_1ijil7t_di" bpmnElement="Gateway_1ijil7t" isMarkerVisible="true">
+        <dc:Bounds x="1645" y="575" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1701" y="590" width="78" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_109v1xl_di" bpmnElement="Event_1g99yr2">
         <dc:Bounds x="1752" y="752" width="36" height="36" />
@@ -562,6 +597,11 @@
         <di:waypoint x="1430" y="465" />
         <di:waypoint x="1532" y="465" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_1nu5h5c_di" bpmnElement="DataInputAssociation_1nu5h5c">
+        <di:waypoint x="1608" y="743" />
+        <di:waypoint x="1660" y="750" />
+        <di:waypoint x="1730" y="750" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataInputAssociation_18q9zo1_di" bpmnElement="DataInputAssociation_18q9zo1">
         <di:waypoint x="1550" y="495" />
         <di:waypoint x="1550" y="560" />
@@ -569,11 +609,6 @@
       <bpmndi:BPMNEdge id="DataOutputAssociation_1y0yl5g_di" bpmnElement="DataOutputAssociation_1y0yl5g">
         <di:waypoint x="1503" y="637" />
         <di:waypoint x="1159" y="1085" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataInputAssociation_1nu5h5c_di" bpmnElement="DataInputAssociation_1nu5h5c">
-        <di:waypoint x="1608" y="743" />
-        <di:waypoint x="1660" y="750" />
-        <di:waypoint x="1730" y="750" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
