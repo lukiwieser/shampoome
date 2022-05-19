@@ -149,6 +149,12 @@ public class Client {
                     }
                     LOGGER.info("diet: " + diet);
 
+                    String fragrance = externalTask.getVariable("fragrance");
+                    if(fragrance != null) {
+                        ingredients += ", " + fragrance;
+                        description += " Lastly " + fragrance + " was chosen by you and added by us as the main fragrance component.";
+                    }
+
                     String bottleSize = externalTask.getVariable("bottleSize");
                     if(bottleSize != null) {
                         if(bottleSize.equals("S")) {
@@ -163,7 +169,8 @@ public class Client {
                         }
                     }
 
-                    individualShampoo.setName("Dope Ass Vegan All Natural Shampoo");
+                    String nickName = externalTask.getVariable("nickName");
+                    individualShampoo.setName(nickName + "'s dope vegan all natural individual shampoo");
                     individualShampoo.setIngredients(ingredients);
                     individualShampoo.setDescription(description);
 
@@ -171,7 +178,7 @@ public class Client {
                     LOGGER.info("Description: " + individualShampoo.getDescription());
 
                     LOGGER.info("Charging credit card with an amount of '" + individualShampoo.getCost()
-                            + "'€ for your '" + individualShampoo.getName() + "'");
+                            + "'€ for '" + individualShampoo.getName() + "'");
 
                     /*
                     try {
