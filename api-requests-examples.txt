@@ -14,7 +14,18 @@ POST http://localhost:8080/engine-rest/message
 	"messageName": "StartEvent",
 	"tenantId": "shampoome-process",
 	"processVariables" : {
-    "preferences" : {"value" : "wet hair", "type": "String"}
+    "age" : {"value" : 23, "type": "Integer"},
+    "hairType" : {"value" : "straight", "type": "String"},
+    "scalp" : {"value" : "dry", "type": "String"},
+    "splitEnds" : {"value" : false, "type": "boolean"},
+    "dandruff" : {"value" : true, "type": "boolean"},
+    "hairLossMedium" : {"value" : false, "type": "boolean"},
+    "hairLossStrong" : {"value" : false, "type": "boolean"},
+    "thinHair" : {"value" : false, "type": "boolean"},
+    "diet" : {"value" : "meat", "type": "String"},
+    "bottleSize" : {"value" : "M", "type": "String"},
+    "fragrance" : {"value" : "grapefruit", "type" : "String"},
+    "nickName" : {"value" : "Lucy", "type" : "String"}
   },
 	"resultEnabled" : true
 }
