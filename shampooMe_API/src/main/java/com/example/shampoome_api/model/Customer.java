@@ -1,4 +1,4 @@
-package model;
+package com.example.shampoome_api.model;
 
 import javax.validation.constraints.Email;
 import java.util.Date;
@@ -9,6 +9,16 @@ public class Customer {
     private String address;
     @Email
     private String email;
+
+    private Preferences preferences;
+
+    public Preferences getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(Preferences preferences) {
+        this.preferences = preferences;
+    }
 
     public Date getShippingDate() {
         return shippingDate;
