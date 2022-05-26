@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-order-status',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderStatusComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private titleService: Title
+  ) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle("Order Status | ShampooMe");
   }
 
 }

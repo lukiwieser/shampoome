@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-quiz',
@@ -12,7 +13,9 @@ export class QuizComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private titleSerivce: Title
   ) {
+    this.titleSerivce.setTitle("Hair Quiz | ShampooMe");
     this.form = this.formBuilder.group({
       age: ['',[Validators.required]],
       hairType: ['',[Validators.required]],

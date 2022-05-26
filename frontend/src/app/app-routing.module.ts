@@ -10,10 +10,10 @@ import { QuizComponent } from './components/quiz/quiz.component';
 
 const routes: Routes = [
   {path: "quiz", component: QuizComponent},
-  {path: "order", component: OrderComponent},
-  {path: "order-processing", component: OrderProcessingComponent},
-  {path: "order-status", component: OrderStatusComponent},
-  {path: "feedback", component: FeedbackComponent},
+  {path: "order/:processId", component: OrderComponent},
+  {path: "order-processing/:processId", component: OrderProcessingComponent},
+  {path: "order-status/:orderId", component: OrderStatusComponent},
+  {path: "feedback/:processId", component: FeedbackComponent},
   {path: "quiz", component: QuizComponent},
   {path: "", component: MainComponent},
   {path: "**", component: PageNotFoundComponent}
