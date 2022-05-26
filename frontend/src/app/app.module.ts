@@ -10,6 +10,7 @@ import { OrderProcessingComponent } from './components/order-processing/order-pr
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { OrderStatusComponent } from './components/order-status/order-status.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     OrderProcessingComponent,
     FeedbackComponent,
     OrderStatusComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
