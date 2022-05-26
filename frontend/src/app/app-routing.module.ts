@@ -1,7 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FeedbackComponent } from './components/feedback/feedback.component';
+import { MainComponent } from './components/main/main.component';
+import { OrderProcessingComponent } from './components/order-processing/order-processing.component';
+import { OrderStatusComponent } from './components/order-status/order-status.component';
+import { OrderComponent } from './components/order/order.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { QuizComponent } from './components/quiz/quiz.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {path: "quiz", component: QuizComponent},
+  {path: "order", component: OrderComponent},
+  {path: "order-processing", component: OrderProcessingComponent},
+  {path: "order-status", component: OrderStatusComponent},
+  {path: "feedback", component: FeedbackComponent},
+  {path: "quiz", component: QuizComponent},
+  {path: "", component: MainComponent},
+  {path: "**", component: PageNotFoundComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
