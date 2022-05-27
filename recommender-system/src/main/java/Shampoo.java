@@ -1,20 +1,11 @@
 public class Shampoo {
 
-    private String name;
     private String ingredients;
     private String description;
     private String size;
     private Integer cost;
 
     public Shampoo() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getIngredients() {

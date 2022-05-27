@@ -34,11 +34,11 @@ public class Client {
                     String description = individualShampoo.getDescription();
 
                     //get the customer's age (question 1)
-                    int age = externalTask.getVariable("age");
-                    if(age <= 25) {
+                    String ageOver25 = externalTask.getVariable("ageOver25");
+                    if(ageOver25.equals("no")) {
                         //add superfruits to base shampoo (moisture and shine)
                         ingredients += ", ginger, goji berries";
-                        description += " For people under the age of 25 we add some superfruits for long lasting moisture and shine.";
+                        description += " For people under the age of 26 we add some superfruits for long lasting moisture and shine.";
                     } else {
                         //add ceramides, antioxidants & hyaluronic acid
                         ingredients += ", ceramides, antioxidants, hyaluronic acid";
@@ -46,7 +46,7 @@ public class Client {
                                 "as reinforce the hair's structure. Additionally antioxidants and hyaluronic acid is added to" +
                                 "help nourish the strands and retain moisture in the hair.";
                     }
-                    LOGGER.info("age: " + age);
+                    LOGGER.info("over 25: " + ageOver25);
 
                     //get the customer's hair type (question 2)
                     String hairType = externalTask.getVariable("hairType");
@@ -86,8 +86,8 @@ public class Client {
                     LOGGER.info("scalp: " + scalp);
 
                     //split ends (question 4)
-                    boolean splitEnds = externalTask.getVariable("splitEnds");
-                    if(splitEnds) {
+                    String splitEnds = externalTask.getVariable("splitEnds");
+                    if(splitEnds.equals("yes")) {
                         //add plenty of argan oil, avocado oil, fish oil
                         ingredients += ", avocado oil";
                         description += " To counter split ends avocado oil is added which helps soften, repair and protect the hair.";
@@ -95,8 +95,8 @@ public class Client {
                     LOGGER.info("split ends: " + splitEnds);
 
                     //dandruff (question 5)
-                    boolean dandruff = externalTask.getVariable("dandruff");
-                    if(dandruff) {
+                    String dandruff = externalTask.getVariable("dandruff");
+                    if(dandruff.equals("yes")) {
                         //add onions, olive oil, apple cider vinegar
                         ingredients += ", olive oil, apple cider vinegar";
                         description += " To counter loose dry skin on the scalp olive oil and apple cider vinegar are added as well.";
@@ -104,8 +104,8 @@ public class Client {
                     LOGGER.info("dandruff: " + dandruff);
 
                     //hairLossMedium - if it is only a little more than average (question 6)
-                    boolean hairLossMedium = externalTask.getVariable("hairLossMedium");
-                    if(hairLossMedium) {
+                    String hairLossMedium = externalTask.getVariable("hairLossMedium");
+                    if(hairLossMedium.equals("yes")) {
                         //add strained rice water (after cooking), castor oil
                         ingredients += ", castor oil";
                         description += " To strengthen the roots of your hair castor oil is added for people with a little " +
@@ -114,8 +114,8 @@ public class Client {
                     LOGGER.info("hairLossMedium: " + hairLossMedium);
 
                     //hairLossStrong - if it runs in the family / is a genetic issue (question 7)
-                    boolean hairLossStrong = externalTask.getVariable("hairLossStrong");
-                    if(hairLossStrong) {
+                    String hairLossStrong = externalTask.getVariable("hairLossStrong");
+                    if(hairLossStrong.equals("yes")) {
                         //add anti hair loss ingredients: phyto-caffeine, minoxidil, niacin
                         ingredients += ", phyto-caffeine, niacin";
                         description += " To help counteract genetic hair loss issues we added phyto-caffeine and niacin which is proven" +
@@ -124,30 +124,14 @@ public class Client {
                     LOGGER.info("hairLossStrong: " + hairLossStrong);
 
                     //thin hair (question 8)
-                    boolean thinHair = externalTask.getVariable("thinHair");
-                    if(thinHair) {
+                    String thinHair = externalTask.getVariable("thinHair");
+                    if(thinHair.equals("yes")) {
                         //add coconut oil, turmeric, cider vinegar, castor oil
                         ingredients += ", coconut oil, turmeric";
                         description += " People with thin hair need more thickness and volume, which is the reason for some extra " +
                                 "coconut oil and additionally turmeric.";
                     }
                     LOGGER.info("thinHair: " + thinHair);
-
-                    //majority of diet (question 9)
-                    String diet = externalTask.getVariable("diet");
-                    if(diet.equals("meat") || diet.equals("fish") || diet.equals("sweets")) {
-                        //add lemon and cucumber
-                        ingredients += ", lemon, cucumber";
-                        description += " Lemon and cucumber are added for people that have no problems with protein in their diet, " +
-                                "but might lack some vitamins.";
-                    }
-                    if(diet.equals("vegetables") || diet.equals("sweets")) {
-                        //add milk, wheat (can't add milk, it wouldn't be vegan)
-                        ingredients += ", wheat";
-                        description += " Wheat is added to help with protein in the hair, if it might be possible that not enough protein " +
-                                "is consumed in the diet.";
-                    }
-                    LOGGER.info("diet: " + diet);
 
                     String fragrance = externalTask.getVariable("fragrance");
                     if(fragrance != null) {
@@ -169,16 +153,13 @@ public class Client {
                         }
                     }
 
-                    String nickName = externalTask.getVariable("nickName");
-                    individualShampoo.setName(nickName + "'s dope vegan all natural individual shampoo");
                     individualShampoo.setIngredients(ingredients);
                     individualShampoo.setDescription(description);
 
                     LOGGER.info("Ingredients: " + individualShampoo.getIngredients());
                     LOGGER.info("Description: " + individualShampoo.getDescription());
 
-                    LOGGER.info("Charging credit card with an amount of '" + individualShampoo.getCost()
-                            + "'€ for '" + individualShampoo.getName() + "'");
+                    LOGGER.info("Charging credit card with an amount of '" + individualShampoo.getCost() + "€'");
 
                     /*
                     try {
