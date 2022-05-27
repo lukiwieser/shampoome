@@ -6,6 +6,15 @@ import java.util.Hashtable;
 public class CamundaRequestMessage {
 
     private String messageName;
+
+    public CamundaRequestMessage(String messageName, Dictionary<String, Object> processVariables) {
+        this.messageName = messageName;
+        this.processVariables = processVariables;
+    }
+
+    public CamundaRequestMessage() {
+    }
+
     public final String tenantId = "shampoome-process";
     public final boolean resultEnabled = true;
 

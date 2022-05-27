@@ -1,46 +1,30 @@
 package com.example.shampoome_api.model;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+
 public class Preferences {
 
-    private HairColor hairColor;
-    private HairLength hairLength;
-    private HairStructure hairStructure;
-    private HairType hairType;
+    @Min(16) @Max(120)
+    public int age;
 
-    public HairColor getHairColor() {
-        return hairColor;
-    }
+    public String scalp;
+    public boolean splitEnds;
+    public boolean dandruff;
+    public boolean hairLossMedium;
+    public boolean hairLossStrong;
+    public boolean thinHair;
+    public String diet;
 
-    public void setHairColor(HairColor hairColor) {
-        this.hairColor = hairColor;
-    }
+    @Pattern(regexp = "^(S|M|L)$")
+    public String bottleSize;
 
-    public HairLength getHairLength() {
-        return hairLength;
-    }
+    public String fragrance;
 
-    public void setHairLength(HairLength hairLength) {
-        this.hairLength = hairLength;
-    }
+    @Pattern(regexp = "^[a-zA-Z]{2,}$")
+    public String nickName;
 
-    public HairStructure getHairStructure() {
-        return hairStructure;
-    }
+    public String hairType;
 
-    public void setHairStructure(HairStructure hairStructure) {
-        this.hairStructure = hairStructure;
-    }
-
-    public HairType getHairType() {
-        return hairType;
-    }
-
-    public void setHairType(HairType hairType) {
-        this.hairType = hairType;
-    }
-
-    enum HairColor {black, brown, blonde}
-    enum HairLength {Short, medium, neckLine, shoulder, veryLong}
-    enum HairStructure {straight, wavy, curly, colly}
-    enum HairType {dry, neutral, oily}
 }

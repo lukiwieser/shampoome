@@ -1,24 +1,19 @@
 package com.example.shampoome_api.model;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 public class Customer {
+
+    @NotNull
     private Date shippingDate;
-    private String name;
+
+    @Pattern(regexp = "^[a-zA-Z]{5,} [0-9a-zA-Z/]{1,}$")
     private String address;
     @Email
     private String email;
-
-    private Preferences preferences;
-
-    public Preferences getPreferences() {
-        return preferences;
-    }
-
-    public void setPreferences(Preferences preferences) {
-        this.preferences = preferences;
-    }
 
     public Date getShippingDate() {
         return shippingDate;
@@ -26,14 +21,6 @@ public class Customer {
 
     public void setShippingDate(Date shippingDate) {
         this.shippingDate = shippingDate;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getAddress() {
