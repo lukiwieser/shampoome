@@ -5,5 +5,12 @@
         "bottleSize": "S",
         "description": "Very nice shampoo",
         "ingredients": "distilled water, decyl glucoside, glycerine, guar gum, coco betaine, ginger, goji berriescoconut oil, almonds, aloe vera, olive oil, apple cider vinegar, coconut oil, turmeric, grapefruit"
+    },
+    "shampoo-details-null": {
+        "nickName": null,
+        "price": null,
+        "bottleSize": null,
+        "description": null,
+        "ingredients": null
     }
 }

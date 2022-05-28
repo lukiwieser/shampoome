@@ -53,24 +53,27 @@ export class OrderComponent implements OnInit {
   }
 
   periodicCheck(): void {
-    let shampooDetails = new ShampooDetails(null, null, null, null, null);
     const reqInterval = setInterval(() => {
-      shampooDetails = this.checkRecommenderSystem();
+      this.checkRecommenderSystem();
     }, 2000);
-    shampooDetails.nickName ? () => {
-      clearInterval(reqInterval);
-      this.shampooDetails = shampooDetails;
-    } : null;
+    this.shampooDetails.nickName ? clearInterval(reqInterval) : null;
   }
 
-  checkRecommenderSystem(): ShampooDetails {
-    let shampooDetails = new ShampooDetails(null, null, null, null, null)
+  checkRecommenderSystem(): void {
     if(this.processId===null) {
-      return shampooDetails
+      return
     }
-    this.mainService.checkRecommenderSystem(this.processId).subscribe(ingredientsRes => {
-      ingredientsRes.nickName ? () => { shampooDetails = ingredientsRes } : null;
+    this.mainService.checkRecommenderSystem(this.processId).subscribe(shampooDetailsRes => {
+      if(shampooDetailsRes ? true : false) {
+        this.shampooDetails = new ShampooDetails(
+          shampooDetailsRes.nickName,
+          shampooDetailsRes.price,
+          shampooDetailsRes.bottleSize,
+          shampooDetailsRes.description,
+          shampooDetailsRes.ingredients,
+        )
+      }
     });
-    return shampooDetails
+    return
   }
 }

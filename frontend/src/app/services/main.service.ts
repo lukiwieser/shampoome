@@ -24,6 +24,9 @@ export class MainService {
 
   checkRecommenderSystem(processId: String) : Observable<ShampooDetails> {
     return this.http.get<ShampooDetails>(this.baseUri+'shampoo-details?processId='+processId);
+
+    // TODO: just for mocking the API remove later
+    // return this.http.get<ShampooDetails>(this.baseUri+'shampoo-details-null');
   }
 
   placeOrder(orderReq: OrderReq) : Observable<any> {
