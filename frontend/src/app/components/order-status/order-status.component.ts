@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { StringifyService } from 'src/app/services/stringify.service';
-import { Order } from '../entities/order';
+import { Order } from '../../entities/order';
 
 @Component({
   selector: 'app-order-status',

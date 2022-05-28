@@ -3,8 +3,8 @@ import { PreferencesReq } from '../entities/preferences-req';
 import { HttpClient } from '@angular/common/http';
 import { ProcessId } from '../entities/process-id';
 import { Observable } from 'rxjs';
-import { Ingredients } from '../entities/ingredients';
 import { OrderReq } from '../entities/order-req';
+import { ShampooDetails } from '../entities/shampoo-details';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +21,8 @@ export class MainService {
     return this.http.post<ProcessId>(this.baseUri+'preferences', preferencesReq);
   }
 
-  checkRecommenderSystem(processId: String) : Observable<Ingredients> {
-    return this.http.get<Ingredients>(this.baseUri+'shampoo-details?processId='+processId);
+  checkRecommenderSystem(processId: String) : Observable<ShampooDetails> {
+    return this.http.get<ShampooDetails>(this.baseUri+'shampoo-details?processId='+processId);
   }
 
   placeOrder(orderReq: OrderReq) : Observable<any> {

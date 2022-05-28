@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { PreferencesReq } from 'src/app/entities/preferences-req';
 import { MainService } from 'src/app/services/main.service';
+import { StringifyService } from 'src/app/services/stringify.service';
 
 @Component({
   selector: 'app-quiz',
@@ -18,7 +19,8 @@ export class QuizComponent implements OnInit {
     private formBuilder: FormBuilder,
     private titleSerivce: Title,
     private mainService: MainService,
-    private router: Router
+    private router: Router,
+    public ss: StringifyService
   ) {
     this.titleSerivce.setTitle("Hair Quiz | ShampooMe");
     this.form = this.formBuilder.group({

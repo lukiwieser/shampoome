@@ -193,15 +193,15 @@
             <h2 class="text-xl font-bold mt-8 mb-2">What size of bottle do you want?</h2>
             <label class="block mb-2">
                 <input type="radio" name="bottleSize" formControlName="bottleSize" value="S" class="text-emerald-500 focus:ring-emerald-500">
-                S 
+                {{ss.bottleSizeAsString("S")}} 
             </label>
             <label class="block mb-2">
                 <input type="radio" name="bottleSize" formControlName="bottleSize" value="M" class="text-emerald-500 focus:ring-emerald-500">
-                M
+                {{ss.bottleSizeAsString("M")}}
             </label>
             <label class="block mb-2">
                 <input type="radio" name="bottleSize" formControlName="bottleSize" value="L" class="text-emerald-500 focus:ring-emerald-500">
-                L
+                {{ss.bottleSizeAsString("L")}}
             </label>
             <p *ngIf="formSubmitted && bottleSize?.errors?.['required']" class="text-sm text-red-500">
                 Please answer this question.

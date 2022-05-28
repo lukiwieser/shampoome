@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BottleSize, DeliveryStatus } from '../components/entities/enums';
+import { BottleSize, DeliveryStatus } from '../entities/enums';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ export class StringifyService {
 
   constructor() { }
 
-  bottleSizeAsString(bottleSize : BottleSize):  String { 
+  bottleSizeAsString(bottleSize : BottleSize | null):  String { 
     switch (bottleSize) {
       case "L": return "Large 1000ml";
       case "M": return "Medium 250ml"; 
