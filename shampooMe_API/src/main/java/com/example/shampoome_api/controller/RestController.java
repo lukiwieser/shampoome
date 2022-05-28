@@ -46,7 +46,7 @@ public class RestController {
         try {
             HttpEntity<String> camundaRequest = new HttpEntity<>(objectMapper.writeValueAsString(camundaRequestMessage), headers);
             String result = restTemplate.postForObject(camundaEndpoint + "message", camundaRequest, String.class);
-            CamundaResponseMessage[] messageObjects = objectMapper.readValue(result, CamundaResponseMessage[].class);
+            CamundaResponseStartEvent[] messageObjects = objectMapper.readValue(result, CamundaResponseStartEvent[].class);
             String processId = messageObjects[0].getId();
             logger.info(processId); //processId
             return processId;
@@ -100,6 +100,7 @@ public class RestController {
         try {
             String result = new RestTemplate().getForObject(camundaEndpoint + "process-instance/" + processId + "/variables", String.class);
             logger.info(result);
+            CamundaResponseStartEvent[] messageObjects = objectMapper.readValue(result, CamundaResponseStartEvent[].class);
             return result;
         } catch (Exception ex) {
             logger.severe(ex.getMessage());

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CamundaResponseMessage {
+public class CamundaResponseStartEvent {
 
     private String id;
 
