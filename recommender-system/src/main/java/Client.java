@@ -3,6 +3,8 @@ import java.awt.Desktop;
 import java.net.URI;
 
 import org.camunda.bpm.client.ExternalTaskClient;
+import org.camunda.bpm.engine.variable.VariableMap;
+import org.camunda.bpm.engine.variable.Variables;
 
 public class Client {
     private final static Logger LOGGER = Logger.getLogger(Client.class.getName());
@@ -11,7 +13,7 @@ public class Client {
         LOGGER.info("starting client...");
 
         ExternalTaskClient client = ExternalTaskClient.create()
-                .baseUrl("http://localhost:8080/engine-rest")
+                .baseUrl("http://lva924-server3.ec.tuwien.ac.at:8081/engine-rest")
                 .asyncResponseTimeout(10000) // long polling timeout
                 .build();
 
@@ -159,7 +161,14 @@ public class Client {
                     LOGGER.info("Ingredients: " + individualShampoo.getIngredients());
                     LOGGER.info("Description: " + individualShampoo.getDescription());
 
-                    LOGGER.info("Charging credit card with an amount of '" + individualShampoo.getCost() + "€'");
+                    LOGGER.info("Charging credit card with an amount of '" + individualShampoo.getCost() + "€' in size: " +
+                            individualShampoo.getSize());
+
+                    VariableMap variables = Variables.createVariables();
+                    variables.put("ingredients", individualShampoo.getIngredients());
+                    variables.put("description", individualShampoo.getDescription());
+                    variables.put("bottleSizeActual", individualShampoo.getSize());
+                    variables.put("cost", individualShampoo.getCost());
 
                     /*
                     try {
@@ -169,7 +178,7 @@ public class Client {
                     }
                     */
                     // Complete the task
-                    externalTaskService.complete(externalTask);
+                    externalTaskService.complete(externalTask, variables);
                 })
                 .open();
     }
