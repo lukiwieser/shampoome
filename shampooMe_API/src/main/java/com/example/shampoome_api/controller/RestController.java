@@ -94,14 +94,25 @@ public class RestController {
     }
 
     @GetMapping("shampoo-details")
-    public String getShampooDetails(@RequestParam String processId) {
+    public Shampoo getShampooDetails(@RequestParam String processId) {
         CheckProcessId(processId);
 
         try {
             String result = new RestTemplate().getForObject(camundaEndpoint + "process-instance/" + processId + "/variables", String.class);
             logger.info(result);
-            CamundaResponseStartEvent[] messageObjects = objectMapper.readValue(result, CamundaResponseStartEvent[].class);
-            return result;
+            CamundaResponseShampoo messageObjects = objectMapper.readValue(result, CamundaResponseShampoo.class);
+            Shampoo shampoo = new Shampoo();
+            shampoo.setNickName(messageObjects.getNickName());
+            shampoo.setIngredients(messageObjects.getIngredients());
+            shampoo.setDescription(messageObjects.getDescription());
+            shampoo.setBottleSize(messageObjects.getBottleSize());
+            shampoo.setCost(messageObjects.getCost());
+            if(shampoo.getIngredients() == null || shampoo.getDescription() == null ||
+                    shampoo.getBottleSize() == null || shampoo.getCost() == null) {
+                return new Shampoo();
+            } else {
+                return shampoo;
+            }
         } catch (Exception ex) {
             logger.severe(ex.getMessage());
             return null;
