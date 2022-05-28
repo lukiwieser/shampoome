@@ -5,6 +5,7 @@ import { ProcessId } from '../entities/process-id';
 import { Observable } from 'rxjs';
 import { OrderReq } from '../entities/order-req';
 import { ShampooDetails } from '../entities/shampoo-details';
+import { Order } from '../entities/order';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,13 @@ export class MainService {
 
   checkOrderLink(processId: String) : Observable<any> {
     return this.http.get<any>(this.baseUri+'order-id?processId='+processId);
+  }
+
+  getOrderStatus(orderId: String) : Observable<Order> {
+    //return this.http.get<Order>(this.baseUri+'order?orderId='+orderId);
+
+    // TODO: just for mocking the API remove later
+    return this.http.get<Order>(this.baseUri+'order-status');
   }
 
 }
