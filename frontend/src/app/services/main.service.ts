@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ProcessId } from '../entities/process-id';
 import { Observable } from 'rxjs';
 import { Ingredients } from '../entities/ingredients';
+import { OrderReq } from '../entities/order-req';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,9 @@ export class MainService {
 
   checkRecommenderSystem(processId: String) : Observable<Ingredients> {
     return this.http.get<Ingredients>(this.baseUri+'shampoo-details?processId='+processId);
+  }
+
+  placeOrder(orderReq: OrderReq) : Observable<any> {
+    return this.http.post<any>(this.baseUri+'order', orderReq);
   }
 }
