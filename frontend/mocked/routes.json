@@ -4,5 +4,6 @@
     "/order": "/order",
     "/preferences": "/preferences",
     "/order-id": "/order-id",
-    "/order-status": "/order-status"
+    "/order-status": "/order-status",
+    "/feedback": "/feedback"
 }

@@ -45,5 +45,11 @@
     "isDelayed": false,
     "status": "delivered",
     "processId": "11a2342fcf352gg751"
+  },
+  "feedback": {
+    "processId": "11a2342fcf352gg751",
+    "overallSatisfaction": "1",
+    "priceSatisfaction": "2",
+    "comments": "Great"
   }
 }
