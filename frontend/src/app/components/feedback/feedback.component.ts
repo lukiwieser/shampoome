@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { FeedbackReq } from 'src/app/entities/feedback-req';
+import { MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'app-feedback',
@@ -17,6 +19,7 @@ export class FeedbackComponent implements OnInit {
   constructor(
     private titleService: Title,
     private formBuilder: FormBuilder,
+    private mainService: MainService,
     private route: ActivatedRoute,
   ) {
     this.titleService.setTitle("Feedback | ShampooMe");
@@ -43,9 +46,14 @@ export class FeedbackComponent implements OnInit {
       return;
     }
 
-    console.log(this.overallSatisfaction?.value);
-    console.log(this.priceSatisfaction?.value);
-    console.log(this.comments?.value);
+    const feedbackReq = new FeedbackReq(
+      this.processId ? this.processId : "",
+      this.overallSatisfaction?.value,
+      this.priceSatisfaction?.value,
+      this.comments?.value,
+    )
+    this.mainService.postFeeback(feedbackReq).subscribe(res => {
+    });
 
     this.formSubmittedSuccessfully = true;
   }

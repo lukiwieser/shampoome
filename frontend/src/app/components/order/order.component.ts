@@ -6,6 +6,7 @@ import { MainService } from 'src/app/services/main.service';
 import { Router } from '@angular/router';
 import { StringifyService } from 'src/app/services/stringify.service';
 import { ShampooDetails } from '../../entities/shampoo-details';
+import { OrderReq } from 'src/app/entities/order-req';
 
 @Component({
   selector: 'app-order',
@@ -17,6 +18,7 @@ export class OrderComponent implements OnInit {
   formSubmitted : Boolean = false;
   processId! : string | null;
   shampooDetails! : ShampooDetails;
+  interval: NodeJS.Timeout | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,7 +38,8 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.processId = params.get("processId");
-      this.periodicCheck();
+      console.log(this.shampooDetails);
+      this.shampooDetails ? null : this.periodicCheck();
     })
   }
 
@@ -48,29 +51,38 @@ export class OrderComponent implements OnInit {
     if(this.form.invalid) {
       return;
     }
+    const orderReq = new OrderReq(
+      this.processId ? this.processId : "",
+      this.shippingAddress?.value,
+      this.matriculationNumber?.value,
+    );
 
-    console.log(this.shippingAddress?.value)
+    this.mainService.placeOrder(orderReq).subscribe(res => {
+      this.router.navigate([`../order-processing/${this.processId}`]);
+    });
   }
 
   periodicCheck(): void {
-    let shampooDetails = new ShampooDetails(null, null, null, null, null);
-    const reqInterval = setInterval(() => {
-      shampooDetails = this.checkRecommenderSystem();
+    this.interval = setInterval(() => {
+      this.checkRecommenderSystem();
     }, 2000);
-    shampooDetails.nickName ? () => {
-      clearInterval(reqInterval);
-      this.shampooDetails = shampooDetails;
-    } : null;
   }
 
-  checkRecommenderSystem(): ShampooDetails {
-    let shampooDetails = new ShampooDetails(null, null, null, null, null)
+  checkRecommenderSystem(): void {
     if(this.processId===null) {
-      return shampooDetails
+      return 
     }
-    this.mainService.checkRecommenderSystem(this.processId).subscribe(ingredientsRes => {
-      ingredientsRes.nickName ? () => { shampooDetails = ingredientsRes } : null;
+    this.mainService.checkRecommenderSystem(this.processId).subscribe(shampooDetailsRes => {
+      if(shampooDetailsRes ? true : false) {
+        this.shampooDetails = new ShampooDetails(
+          shampooDetailsRes.nickName,
+          shampooDetailsRes.price,
+          shampooDetailsRes.bottleSize,
+          shampooDetailsRes.description,
+          shampooDetailsRes.ingredients,
+        )
+        clearTimeout(this.interval)
+      }
     });
-    return shampooDetails
   }
 }
