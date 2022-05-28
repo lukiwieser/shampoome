@@ -17,6 +17,7 @@ export class OrderComponent implements OnInit {
   formSubmitted : Boolean = false;
   processId! : string | null;
   shampooDetails! : ShampooDetails;
+  interval: NodeJS.Timeout | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,7 +37,8 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.processId = params.get("processId");
-      this.periodicCheck();
+      console.log(this.shampooDetails);
+      this.shampooDetails ? null : this.periodicCheck();
     })
   }
 
@@ -53,15 +55,14 @@ export class OrderComponent implements OnInit {
   }
 
   periodicCheck(): void {
-    const reqInterval = setInterval(() => {
+    this.interval = setInterval(() => {
       this.checkRecommenderSystem();
     }, 2000);
-    this.shampooDetails.nickName ? clearInterval(reqInterval) : null;
   }
 
   checkRecommenderSystem(): void {
     if(this.processId===null) {
-      return
+      return 
     }
     this.mainService.checkRecommenderSystem(this.processId).subscribe(shampooDetailsRes => {
       if(shampooDetailsRes ? true : false) {
@@ -72,8 +73,8 @@ export class OrderComponent implements OnInit {
           shampooDetailsRes.description,
           shampooDetailsRes.ingredients,
         )
+        clearTimeout(this.interval)
       }
     });
-    return
   }
 }
