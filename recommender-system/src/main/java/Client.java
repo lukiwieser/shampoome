@@ -54,7 +54,7 @@ public class Client {
                     String hairType = externalTask.getVariable("hairType");
                     if(hairType.equals("straight")) {
                         //add coconut oil, soybean, almond, sunflower oils, vitamins B5, C, and E to shampoo
-                        ingredients += "coconut oil, almonds";
+                        ingredients += ", coconut oil, almonds";
                         description += " Especially for our straight haired customers volume is crucial for the best look " +
                                 "which is why coconut oil and almonds are added.";
                     } else if(hairType.equals("wavy") || hairType.equals("curly")) {
