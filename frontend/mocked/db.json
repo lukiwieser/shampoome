@@ -1,16 +1,34 @@
 {
-    "shampoo-details": {
-        "nickName": "Nick",
-        "price": 30,
-        "bottleSize": "S",
-        "description": "Very nice shampoo",
-        "ingredients": "distilled water, decyl glucoside, glycerine, guar gum, coco betaine, ginger, goji berriescoconut oil, almonds, aloe vera, olive oil, apple cider vinegar, coconut oil, turmeric, grapefruit"
-    },
-    "shampoo-details-null": {
-        "nickName": null,
-        "price": null,
-        "bottleSize": null,
-        "description": null,
-        "ingredients": null
-    }
+  "shampoo-details": {
+    "nickName": "Nick",
+    "price": 30,
+    "bottleSize": "S",
+    "description": "Very nice shampoo",
+    "ingredients": "distilled water, decyl glucoside, glycerine, guar gum, coco betaine, ginger, goji berriescoconut oil, almonds, aloe vera, olive oil, apple cider vinegar, coconut oil, turmeric, grapefruit"
+  },
+  "shampoo-details-null": {
+    "nickName": null,
+    "price": null,
+    "bottleSize": null,
+    "description": null,
+    "ingredients": null
+  },
+  "order": {
+    "processId": "asdasd",
+    "shippingAddress": "Address",
+    "matriculationNumber": "11741163"
+  },
+  "preferences": {
+    "ageOver25": "No",
+    "hairType": "wavy_or_curly",
+    "scalp": "normal",
+    "splitEnds": "yes",
+    "dandruff": "yes",
+    "hairLossMedium": "no",
+    "hairLossStrong": "no",
+    "thinHair": "no",
+    "fragrance": "Coconut",
+    "bottleSize": "M",
+    "nickName": "Sebi"
+  }
 }

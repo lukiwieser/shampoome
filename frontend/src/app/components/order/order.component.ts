@@ -6,6 +6,7 @@ import { MainService } from 'src/app/services/main.service';
 import { Router } from '@angular/router';
 import { StringifyService } from 'src/app/services/stringify.service';
 import { ShampooDetails } from '../../entities/shampoo-details';
+import { OrderReq } from 'src/app/entities/order-req';
 
 @Component({
   selector: 'app-order',
@@ -50,8 +51,15 @@ export class OrderComponent implements OnInit {
     if(this.form.invalid) {
       return;
     }
+    const orderReq = new OrderReq(
+      this.processId ? this.processId : "",
+      this.shippingAddress?.value,
+      this.matriculationNumber?.value,
+    );
 
-    console.log(this.shippingAddress?.value)
+    this.mainService.placeOrder(orderReq).subscribe(res => {
+      this.router.navigate([`../order-processing/${this.processId}`]);
+    });
   }
 
   periodicCheck(): void {

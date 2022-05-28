@@ -74,8 +74,7 @@ export class QuizComponent implements OnInit {
     )
 
     this.mainService.sendPreferences(preferenceReq).subscribe(processIdRes => {
-      const processId = processIdRes.processId;
-      this.router.navigate([`../order/${processId}`]);
+      this.router.navigate([`../order/${processIdRes.processId}`]);
     });
   }
 
