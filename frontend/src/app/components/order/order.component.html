@@ -18,7 +18,7 @@
         <p class="text-4xl ">{{shampooDetails.price}}€</p>
 
         <p class="mt-8 font-medium">Size</p>
-        <p class="text-gray-600 max-w-lg text-justify">{{bottleSizeAsString}}</p>
+        <p class="text-gray-600 max-w-lg text-justify">{{ss.bottleSizeAsString(shampooDetails.bottleSize) }}</p>
 
         <p class="mt-8 font-medium">Ingiridients</p>
         <p class="text-gray-600 max-w-lg text-justify"> {{shampooDetails.ingredients}}</p>
@@ -32,7 +32,6 @@
                     The matriculation number (8 digits) without leading letters. 7-digit matriculation numbers require a leading 0.
                 </p>
                 
-
                 <p *ngIf="formSubmitted && matriculationNumber?.errors?.['required']" class="text-sm text-red-500 mt-1">
                     Please answer this question.
                 </p>

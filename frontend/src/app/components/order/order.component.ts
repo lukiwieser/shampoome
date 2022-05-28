@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { StringifyService } from 'src/app/services/stringify.service';
 import { ShampooDetails } from '../entities/shampoo-details';
 
 @Component({
@@ -19,6 +20,7 @@ export class OrderComponent implements OnInit {
     private route: ActivatedRoute,
     private titleService: Title,
     private formBuilder: FormBuilder,
+    public ss: StringifyService
     ) { 
       this.titleService.setTitle("Order | ShampooMe");
       this.form = this.formBuilder.group({
@@ -43,15 +45,6 @@ export class OrderComponent implements OnInit {
 
   get matriculationNumber():  AbstractControl | null { return this.form.get('matriculationNumber'); }
   get shippingAddress():  AbstractControl | null { return this.form.get('shippingAddress'); }
-
-  get bottleSizeAsString():  String { 
-    switch (this.shampooDetails?.bottleSize) {
-      case "L": return "Large 1000ml";
-      case "M": return "Medium 250ml"; 
-      case "S": return "Small 100ml"; 
-      default: return "";
-    }
-  }
 
   submit() {
     this.formSubmitted = true;
