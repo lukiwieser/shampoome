@@ -9,13 +9,12 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { QuizComponent } from './components/quiz/quiz.component';
 
 const routes: Routes = [
-  {path: "quiz", component: QuizComponent},
   {path: "order/:processId", component: OrderComponent},
   {path: "order-processing/:processId", component: OrderProcessingComponent},
   {path: "order-status/:orderId", component: OrderStatusComponent},
   {path: "feedback/:processId", component: FeedbackComponent},
-  {path: "quiz", component: QuizComponent},
   {path: "", component: MainComponent},
+  {path: "quiz", component: QuizComponent},
   {path: "**", component: PageNotFoundComponent}
 ];
 
