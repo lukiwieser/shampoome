@@ -17,16 +17,15 @@ public class Mapper {
         camundaRequestMessage.setMessageName("StartEvent");
 
         Map<String, Object> map = new HashMap<>();
-        map.put("age", preferences.age);
+        map.put("ageOver25", preferences.ageOver25);
         map.put("hairType", preferences.hairType);
         map.put("scalp", preferences.scalp);
         map.put("splitEnds", preferences.splitEnds);
         map.put("dandruff", preferences.dandruff);
         map.put("hairLossMedium", preferences.hairLossMedium);
-        map.put("hairLossString", preferences.hairLossStrong);
+        map.put("hairLossStrong", preferences.hairLossStrong);
         map.put("thinHair", preferences.thinHair);
-        map.put("diet", preferences.diet);
-        map.put("bottleSite", preferences.bottleSize);
+        map.put("bottleSize", preferences.bottleSize);
         map.put("fragrance", preferences.fragrance);
         map.put("nickName", preferences.nickName);
 

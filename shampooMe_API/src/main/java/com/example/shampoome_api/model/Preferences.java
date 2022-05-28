@@ -6,15 +6,14 @@ import javax.validation.constraints.Pattern;
 
 public class Preferences {
 
-    @Min(16) @Max(120)
-    public int age;
+    public String ageOver25;
 
     public String scalp;
-    public boolean splitEnds;
-    public boolean dandruff;
-    public boolean hairLossMedium;
-    public boolean hairLossStrong;
-    public boolean thinHair;
+    public String splitEnds;
+    public String dandruff;
+    public String hairLossMedium;
+    public String hairLossStrong;
+    public String thinHair;
     public String diet;
 
     @Pattern(regexp = "^(S|M|L)$")
