@@ -32,4 +32,9 @@ export class MainService {
   placeOrder(orderReq: OrderReq) : Observable<any> {
     return this.http.post<any>(this.baseUri+'order', orderReq);
   }
+
+  checkOrderLink(processId: String) : Observable<any> {
+    return this.http.get<any>(this.baseUri+'order-id?processId='+processId);
+  }
+
 }

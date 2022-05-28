@@ -2,5 +2,6 @@
     "/shampoo-details": "/shampoo-details",
     "/shampoo-details-null": "/shampoo-details-null",
     "/order": "/order",
-    "/preferences": "/preferences"
+    "/preferences": "/preferences",
+    "/order-id": "/order-id"
 }
