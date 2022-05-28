@@ -85,6 +85,34 @@ public class RestController {
         try {
             HttpEntity<String> camundaRequest = new HttpEntity<>(objectMapper.writeValueAsString(camundaRequestMessage), headers);
             String result = new RestTemplate().postForObject(camundaEndpoint + "message", camundaRequest, String.class);
+
+            String resultOfGet = new RestTemplate().getForObject(camundaEndpoint + "process-instance/" + feedback.processId + "/variables", String.class);
+            FeedbackToStoreInDB feedbackObject = objectMapper.readValue(resultOfGet, FeedbackToStoreInDB.class);
+
+           /* PreparedStatement pstmt = null;
+            try {
+                pstmt = connection.prepareStatement("INSERT INTO feedback (MatriculationNumber, Name," +
+                        " OverallSatisfaction, PriceSatisfaction, Comment) VALUES (?, ?, ?, ?, ?)");
+                pstmt.setString(1, feedbackObject.getMatriculationNumber());
+                pstmt.setString(2, feedbackObject.getNickName());
+                pstmt.setInt(3, feedbackObject.getOverallSatisfaction());
+                pstmt.setInt(4, feedbackObject.getPriceSatisfaction());
+                pstmt.setString(5, feedbackObject.getComment());
+                ResultSet rs = pstmt.executeQuery();
+
+                if(rs.next()) {
+                    //do something
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } finally {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    logger.severe(e.getMessage());
+                }
+            }*/
+
             logger.info(result);
             return result;
         } catch (Exception ex) {
