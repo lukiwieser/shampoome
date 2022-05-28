@@ -22,7 +22,7 @@ export class OrderProcessingComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.processId = params.get("processId");
 
-      //this.orderId = "asdf557";
+      this.orderId = "asdf557";
     });
   }
 
