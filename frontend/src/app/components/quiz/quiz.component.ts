@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { PreferencesReq } from 'src/app/entities/preferences-req';
 import { MainService } from 'src/app/services/main.service';
 
@@ -16,7 +17,8 @@ export class QuizComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private titleSerivce: Title,
-    private mainService: MainService
+    private mainService: MainService,
+    private router: Router
   ) {
     this.titleSerivce.setTitle("Hair Quiz | ShampooMe");
     this.form = this.formBuilder.group({
@@ -69,9 +71,9 @@ export class QuizComponent implements OnInit {
       this.name?.value
     )
 
-    this.mainService.sendPreferences(preferenceReq).subscribe(data => {
-      // TODO: Handle processId correctly
-      const processId = data.processId;
+    this.mainService.sendPreferences(preferenceReq).subscribe(processIdRes => {
+      const processId = processIdRes.processId;
+      this.router.navigate([`../order/${processId}`]);
     });
   }
 

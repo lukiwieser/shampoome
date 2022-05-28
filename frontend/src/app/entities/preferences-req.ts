@@ -8,8 +8,8 @@ export class PreferencesReq {
         public hairLossMedium: string,
         public hairLossStrong: string,
         public thinHair: string,
-        public fragrance: String,
-        public bottleSize: String,
-        public nickName: String
+        public fragrance: string,
+        public bottleSize: string,
+        public nickName: string
     ) {}
 }

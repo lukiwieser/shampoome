@@ -1,5 +1,5 @@
 export class ProcessId {
     constructor(
-        public processId: string,
+        public processId: String,
     ) {}
 }
