@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.sql.*;
 import java.util.logging.Logger;
 
 @org.springframework.web.bind.annotation.RestController
@@ -25,6 +26,15 @@ public class RestController {
     private Logger logger = Logger.getLogger(RestController.class.getName());
     private ObjectMapper objectMapper = new ObjectMapper();
     private Mapper mapper = new Mapper();
+    private Connection connection;
+
+    public RestController() {
+        try {
+            connection = DriverManager.getConnection("sqlEndpoint", "username", "password");
+        } catch (SQLException e) {
+            logger.severe(e.getMessage());
+        }
+    }
 
     @PostMapping( "preferences")
     public String Preferences(@RequestBody @Validated Preferences preferences) {
@@ -40,20 +50,6 @@ public class RestController {
             String processId = messageObjects[0].getId();
             logger.info(processId); //processId
             return processId;
-        } catch (Exception ex) {
-            logger.severe(ex.getMessage());
-            return null;
-        }
-    }
-
-    @GetMapping("shampoo-details")
-    public String getShampooDetails(@RequestParam String processId) {
-        CheckProcessId(processId);
-
-        try {
-            String result = new RestTemplate().getForObject(camundaEndpoint + "process-instance/" + processId + "/variables", String.class);
-            logger.info(result);
-            return result;
         } catch (Exception ex) {
             logger.severe(ex.getMessage());
             return null;
@@ -95,6 +91,49 @@ public class RestController {
             logger.severe(ex.getMessage());
             return null;
         }
+    }
+
+    @GetMapping("shampoo-details")
+    public String getShampooDetails(@RequestParam String processId) {
+        CheckProcessId(processId);
+
+        try {
+            String result = new RestTemplate().getForObject(camundaEndpoint + "process-instance/" + processId + "/variables", String.class);
+            logger.info(result);
+            return result;
+        } catch (Exception ex) {
+            logger.severe(ex.getMessage());
+            return null;
+        }
+    }
+
+    @GetMapping("order-id")
+    public String GetOrderId(@RequestParam String processId) {
+        PreparedStatement pstmt = null;
+        String result = null;
+        try {
+            pstmt = connection.prepareStatement("select * from orders order where processId = ?");
+            pstmt.setString(1, processId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if(rs.next()) {
+                result = rs.getString("orderId");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                pstmt.close();
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return result;
+    }
+
+    @GetMapping("order")
+    public OrderOutput GetOrder(String orderId) {
+        return null;
     }
 
     private void CheckProcessId(String processId) {
