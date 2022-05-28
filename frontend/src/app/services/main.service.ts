@@ -11,7 +11,8 @@ import { ShampooDetails } from '../entities/shampoo-details';
 })
 export class MainService {
 
-  private baseUri: string = 'http://lva924-server3.ec.tuwien.ac.at:8082/';
+  // private baseUri: string = 'http://lva924-server3.ec.tuwien.ac.at:8082/';
+  private baseUri: string = 'http://localhost:8080/';
 
   constructor(
     private http: HttpClient,

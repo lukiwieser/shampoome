@@ -1,0 +1,9 @@
+{
+    "shampoo-details": {
+        "nickName": "Nick",
+        "price": 30,
+        "bottleSize": "S",
+        "description": "Very nice shampoo",
+        "ingredients": "distilled water, decyl glucoside, glycerine, guar gum, coco betaine, ginger, goji berriescoconut oil, almonds, aloe vera, olive oil, apple cider vinegar, coconut oil, turmeric, grapefruit"
+    }
+}
