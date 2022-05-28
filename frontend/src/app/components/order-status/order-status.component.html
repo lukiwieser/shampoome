@@ -1,1 +1,54 @@
-<p>order-status works!</p>
+<div class="grid grid-cols-2 gap-x-8 my-16" *ngIf="order">
+    <div class="justify-self-end block max-w-lg shampoo-image w-full h-full">
+    </div>
+
+    <div>
+        <h1 class="text-4xl font-bold mb-2">Your order {{ss.statusAsString(order.status)}}!</h1>
+        <p class="text-2xl">Order #{{orderId}}</p>
+
+        <div class="p-4 bg-orange-100 max-w-lg mt-8" *ngIf="order.isDelayed">
+            <p>Unfortunately there is a delay in your order. </p>
+            <p>To make up for it we reduced the price of the product by 20%</p>
+        </div>
+
+        <div class="p-4 bg-orange-100 max-w-lg mt-8" *ngIf="order.status === 'delivered'">
+            <h2 class="text-lg font-medium">We want your Feedback!</h2>
+            <h2 class="font-medium">Just takes 2 Minutes.</h2>
+
+            <a [routerLink]="['/feedback',order.processId]" class="inline-flex justify-center py-2 px-8 mt-4 border border-transparent shadow-sm font-medium text-white bg-orange-900 hover:bg-orange-800 cursor-pointer">
+                Fill out Feedback
+            </a>
+        </div>
+
+        <div class="p-4 bg-gray-100 max-w-lg mt-8">
+            <h2 class="text-lg font-medium">Customer Details</h2>
+
+            <p class="mt-4">Name</p>
+            <p class="text-gray-500">{{order.nickName}}</p>
+
+            <p class="mt-4">Matriculation Number</p>
+            <p class="text-gray-500">{{order.matriculationNumber}}</p>
+
+            <p class="mt-4 ">Shipping Address</p>
+            <p class="text-gray-500 whitespace-pre-line">{{order.shippingAddress}}</p>
+        </div>
+
+        <div class="p-4 bg-gray-100 max-w-lg mt-8">
+            <h2 class="text-lg font-medium">Product Details</h2>
+
+            <p class="mt-4">Price</p>
+            <p class="text-gray-500">
+                <span *ngIf="!order.isDelayed">{{order.price}}€</span>
+                <span *ngIf="order.isDelayed">{{priceReduced}}€ (original price: {{order.price}}€)</span>
+            </p>
+
+            <p class="mt-4 ">Bottle Size</p>
+            <p class="text-gray-500">{{ ss.bottleSizeAsString(order.bottleSize)}}</p>
+
+            <p class="mt-4">Ingredients</p>
+            <p class="text-gray-500 text-justify">{{order.ingredients}}</p>
+        </div>
+    </div>
+
+</div>
+
