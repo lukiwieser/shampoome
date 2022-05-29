@@ -152,12 +152,12 @@ public class RestController {
         PreparedStatement pstmt = null;
         String result = null;
         try {
-            pstmt = connection.prepareStatement("select * from orders order where processId = ?");
+            pstmt = connection.prepareStatement("select top 1 from orders order where processId = ?");
             pstmt.setString(1, processId);
             ResultSet rs = pstmt.executeQuery();
 
             if(rs.next()) {
-                result = rs.getString("orderId");
+                result = GetOrderFromResultSet(rs).orderId;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -173,7 +173,42 @@ public class RestController {
 
     @GetMapping("order")
     public OrderOutput GetOrder(String orderId) {
-        return null;
+        PreparedStatement pstmt = null;
+        OrderOutput result = null;
+        try {
+            pstmt = connection.prepareStatement("select top 1 from orders order where orderId = ?");
+            pstmt.setString(1, orderId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if(rs.next()) {
+                result = GetOrderFromResultSet(rs);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                pstmt.close();
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return result;
+    }
+
+    private OrderOutput GetOrderFromResultSet(ResultSet rs) throws SQLException {
+        OrderOutput orderOutput = new OrderOutput();
+        orderOutput.orderId = rs.getString("orderId");
+        orderOutput.processId = rs.getString("ProcessId");
+        orderOutput.NickName = rs.getString("Nickname");
+        orderOutput.MatriculationNumber = rs.getString("MatriculationNumber");
+        orderOutput.ShippingAddress = rs.getString("Address");
+        orderOutput.ingredients = rs.getString("Ingredients");
+        orderOutput.price = rs.getInt("Price");
+        orderOutput.bottleSize = rs.getString("bottleSize");
+        orderOutput.isDelayed = rs.getBoolean("isDelayed");
+        orderOutput.status = rs.getString("Status");
+        orderOutput.description = rs.getString("description");
+        return orderOutput;
     }
 
     private void CheckProcessId(String processId) {
