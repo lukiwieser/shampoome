@@ -1,0 +1,229 @@
+<div class="max-w-screen-md mx-auto mt-4 mb-20 px-4"> 
+    <h1 class="text-4xl font-bold mb-2">Quiz</h1>
+    <p class="text-xl">Please answer the questions below, so that we can create the best shampoo for your indivudal needs</p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <fieldset>
+            <h2 class="text-xl font-bold mt-8 mb-2">How old are you?</h2>
+            <label class="block mb-2">
+                <input type="radio" name="ageOver25" formControlName="ageOver25" value="No" class="text-emerald-500 focus:ring-emerald-500">
+                Under 25
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="ageOver25" formControlName="ageOver25" value="Yes" class="text-emerald-500 focus:ring-emerald-500">
+                Over 25
+            </label>
+            <p *ngIf="formSubmitted && ageOver25?.errors?.['required']" class="text-sm text-red-500">
+                Please answer this question.
+            </p>
+        </fieldset>
+        
+        <fieldset>
+            <h2 class="text-xl font-bold mt-8 mb-2">What kind of hair do you have?</h2>
+            <label class="block mb-2">
+                <input type="radio" name="hairType" formControlName="hairType" value="straight" class="text-emerald-500 focus:ring-emerald-500">
+                Straight 
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="hairType" formControlName="hairType" value="wavy_or_curly" class="text-emerald-500 focus:ring-emerald-500">
+                Wavy or Curly
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="hairType" formControlName="hairType" value="coily" class="text-emerald-500 focus:ring-emerald-500">
+                Coily
+            </label>
+            <p *ngIf="formSubmitted && hairType?.errors?.['required']" class="text-sm text-red-500">
+                Please answer this question.
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <h2 class="text-xl font-bold mt-8 mb-2">Please choose your scalp moisture.</h2>
+            <label class="block mb-2">
+                <input type="radio" name="scalp" formControlName="scalp" value="dry" class="text-emerald-500 focus:ring-emerald-500">
+                Dry 
+                <span class="text-gray-500">(Your hair may actually feel dry a day or two after washing, because your scalp is absorbing excess oil in an attempt to stay moisturized.)</span>
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="scalp" formControlName="scalp" value="oily" class="text-emerald-500 focus:ring-emerald-500">
+                Oily 
+                <span class="text-gray-500">(If your scalp is oily, your hair may look and feel greasy and flat just a day after washing, which may lead you to washing your hair even more frequently.)</span>
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="scalp" formControlName="scalp" value="normal" class="text-emerald-500 focus:ring-emerald-500">
+                Normal 
+                <span class="text-gray-500">(scalps feel well-hydrated and don't show signs of excess oil, flakes, or irritation. If you have a balanced scalp, you can typically let your hair go about three day between washes)</span>
+            </label>
+            <p *ngIf="formSubmitted && scalp?.errors?.['required']" class="text-sm text-red-500">
+                Please answer this question.
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <h2 class="text-xl font-bold mt-8 mb-2">Do you get split ends?</h2>
+            <label class="block mb-2">
+                <input type="radio" name="splitEnds" formControlName="splitEnds" value="yes" class="text-emerald-500 focus:ring-emerald-500">
+                Yes
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="splitEnds" formControlName="splitEnds" value="no" class="text-emerald-500 focus:ring-emerald-500">
+                No
+            </label>
+            <p *ngIf="formSubmitted && splitEnds?.errors?.['required']" class="text-sm text-red-500">
+                Please answer this question.
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <h2 class="text-xl font-bold mt-8 mb-2">Do you see dandruff on your scalp?</h2>
+            <label class="block mb-2">
+                <input type="radio" name="dandruff" formControlName="dandruff" value="yes" class="text-emerald-500 focus:ring-emerald-500">
+                Yes
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="dandruff" formControlName="dandruff" value="no" class="text-emerald-500 focus:ring-emerald-500">
+                No
+            </label>
+            <p *ngIf="formSubmitted && dandruff?.errors?.['required']" class="text-sm text-red-500">
+                Please answer this question.
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <h2 class="text-xl font-bold mt-8 mb-2">Do you feel like you lose hair more than usual lately?</h2>
+            <label class="block mb-2">
+                <input type="radio" name="hairLossMedium" formControlName="hairLossMedium" value="yes" class="text-emerald-500 focus:ring-emerald-500">
+                Yes, I know for sure I am
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="hairLossMedium" formControlName="hairLossMedium" value="no" class="text-emerald-500 focus:ring-emerald-500">
+                No, seems normal
+            </label>
+            <p *ngIf="formSubmitted && hairLossMedium?.errors?.['required']" class="text-sm text-red-500">
+                Please answer this question.
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <h2 class="text-xl font-bold mt-8 mb-2">Is hair loss an issue for you or in your family?</h2>
+            <label class="block mb-2">
+                <input type="radio" name="hairLossStrong" formControlName="hairLossStrong" value="yes" class="text-emerald-500 focus:ring-emerald-500">
+                Yes
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="hairLossStrong" formControlName="hairLossStrong" value="no" class="text-emerald-500 focus:ring-emerald-500">
+                No
+            </label>
+            <p *ngIf="formSubmitted && hairLossStrong?.errors?.['required']" class="text-sm text-red-500">
+                Please answer this question.
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <h2 class="text-xl font-bold mt-8 mb-2"> Does a single strand of your hair feel thin?</h2>
+            <label class="block mb-2">
+                <input type="radio" name="thinHair" formControlName="thinHair" value="yes" class="text-emerald-500 focus:ring-emerald-500">
+                Yes
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="thinHair" formControlName="thinHair" value="no" class="text-emerald-500 focus:ring-emerald-500">
+                No
+            </label>
+            <p *ngIf="formSubmitted && thinHair?.errors?.['required']" class="text-sm text-red-500">
+                Please answer this question.
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <h2 class="text-xl font-bold mt-8 mb-2">Please choose your fragrance.</h2>
+            <label class="block mb-2">
+                <input type="radio" name="fragrance" formControlName="fragrance" value="Rose water" class="text-emerald-500 focus:ring-emerald-500">
+                Rose water
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="fragrance" formControlName="fragrance" value="Tangerine" class="text-emerald-500 focus:ring-emerald-500">
+                Tangerine
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="fragrance" formControlName="fragrance" value="Coconut" class="text-emerald-500 focus:ring-emerald-500">
+                Coconut
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="fragrance" formControlName="fragrance" value="Jasmine" class="text-emerald-500 focus:ring-emerald-500">
+                Jasmine
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="fragrance" formControlName="fragrance" value="Vanilla" class="text-emerald-500 focus:ring-emerald-500">
+                Vanilla
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="fragrance" formControlName="fragrance" value="Lavender" class="text-emerald-500 focus:ring-emerald-500">
+                Lavender
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="fragrance" formControlName="fragrance" value="Chamomile" class="text-emerald-500 focus:ring-emerald-500">
+                Chamomile
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="fragrance" formControlName="fragrance" value="Jeremy's" class="text-emerald-500 focus:ring-emerald-500">
+                Power 
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="fragrance" formControlName="fragrance" value="Grapefruit" class="text-emerald-500 focus:ring-emerald-500">
+                Grapefruit
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="fragrance" formControlName="fragrance" value="Organic green tea" class="text-emerald-500 focus:ring-emerald-500">
+                Organic green tea
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="fragrance" formControlName="fragrance" value="Olive tree" class="text-emerald-500 focus:ring-emerald-500">
+                 Olive tree
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="fragrance" formControlName="fragrance" value="Elefant fart" class="text-emerald-500 focus:ring-emerald-500">
+                 Surprise
+            </label>
+            <p *ngIf="formSubmitted && fragrance?.errors?.['required']" class="text-sm text-red-500">
+                Please answer this question.
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <h2 class="text-xl font-bold mt-8 mb-2">What size of bottle do you want?</h2>
+            <label class="block mb-2">
+                <input type="radio" name="bottleSize" formControlName="bottleSize" value="S" class="text-emerald-500 focus:ring-emerald-500">
+                {{ss.bottleSizeAsString("S")}} 
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="bottleSize" formControlName="bottleSize" value="M" class="text-emerald-500 focus:ring-emerald-500">
+                {{ss.bottleSizeAsString("M")}}
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="bottleSize" formControlName="bottleSize" value="L" class="text-emerald-500 focus:ring-emerald-500">
+                {{ss.bottleSizeAsString("L")}}
+            </label>
+            <p *ngIf="formSubmitted && bottleSize?.errors?.['required']" class="text-sm text-red-500">
+                Please answer this question.
+            </p>
+        </fieldset>
+
+
+        <h2 class="text-xl font-bold mt-8 mb-2">How should we call you?</h2>
+        <input type="text" name="name" formControlName="name" class="block w-full border-gray-300 mt-1 max-w-sm">
+        <p *ngIf="formSubmitted && name?.errors?.['required']" class="text-sm text-red-500">
+            Please enter the name.
+        </p>       
+
+        <div class="flex flex-col items-center directio my-20">
+
+            <p *ngIf="formSubmitted && form.invalid" class="text-sm text-red-500 block mb-4">
+                Please answer all question, retard!
+            </p>
+
+            <button type="submit" class="inline-flex text-cen justify-center py-2 px-8 border border-transparent shadow-sm font-medium text-white bg-emerald-500 hover:bg-emerald-700 cursor-pointer">
+                Submit
+            </button>
+        </div>
+    </form>
+</div>

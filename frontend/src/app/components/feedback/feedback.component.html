@@ -1,0 +1,72 @@
+<div *ngIf="formSubmittedSuccessfully" class="mt-40 flex flex-col items-center px-4">
+    <p class="text-4xl mt-8 text-center block max-w-4xl font-bold">Thanks for submitting the Feedback!</p>
+</div>
+
+<div class="max-w-screen-md mx-auto mt-16 mb-20 px-4" *ngIf="!formSubmittedSuccessfully"> 
+    <h1 class="text-4xl font-bold mb-2">Feedback</h1>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <fieldset>
+            <h2 class="text-xl font-bold mt-8 mb-2">How statisfied are you with the overall process?</h2>
+            <label class="block mb-2">
+                <input type="radio" name="overallSatisfaction" formControlName="overallSatisfaction" value="1" class="text-emerald-500 focus:ring-emerald-500">
+                very statisfied
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="overallSatisfaction" formControlName="overallSatisfaction" value="2" class="text-emerald-500 focus:ring-emerald-500">
+                statisfied
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="overallSatisfaction" formControlName="overallSatisfaction" value="3" class="text-emerald-500 focus:ring-emerald-500">
+                neutral
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="overallSatisfaction" formControlName="overallSatisfaction" value="4" class="text-emerald-500 focus:ring-emerald-500">
+                a bit dissatisfied
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="overallSatisfaction" formControlName="overallSatisfaction" value="5" class="text-emerald-500 focus:ring-emerald-500">
+                not very satisified
+            </label>
+            <p *ngIf="formSubmitted && overallSatisfaction?.errors?.['required']" class="text-sm text-red-500">
+                Please answer this question.
+            </p>
+        </fieldset>
+        
+        <fieldset>
+            <h2 class="text-xl font-bold mt-8 mb-2">How statisfied are you with the price of your shampoo?</h2>
+            <label class="block mb-2">
+                <input type="radio" name="priceSatisfaction" formControlName="priceSatisfaction" value="1" class="text-emerald-500 focus:ring-emerald-500">
+                very statisfied
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="priceSatisfaction" formControlName="priceSatisfaction" value="2" class="text-emerald-500 focus:ring-emerald-500">
+                statisfied
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="priceSatisfaction" formControlName="priceSatisfaction" value="3" class="text-emerald-500 focus:ring-emerald-500">
+                neutral
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="priceSatisfaction" formControlName="priceSatisfaction" value="4" class="text-emerald-500 focus:ring-emerald-500">
+                a bit dissatisfied
+            </label>
+            <label class="block mb-2">
+                <input type="radio" name="priceSatisfaction" formControlName="priceSatisfaction" value="5" class="text-emerald-500 focus:ring-emerald-500">
+                not very satisified
+            </label>
+            <p *ngIf="formSubmitted && priceSatisfaction?.errors?.['required']" class="text-sm text-red-500">
+                Please answer this question.
+            </p>
+        </fieldset>
+
+        <h2 class="text-xl font-bold mt-8 mb-2">Do you have any additional Comments?</h2>
+        <textarea name="comments" formControlName="comments" class="block w-full border-gray-300 mt-1" rows="3"></textarea>
+
+        <div class="flex flex-col items-center directio my-20">
+            <button type="submit" class="inline-flex text-cen justify-center py-2 px-8 border border-transparent shadow-sm font-medium text-white bg-emerald-500 hover:bg-emerald-700 cursor-pointer">
+                Submit
+            </button>
+        </div>
+    </form>
+</div>
