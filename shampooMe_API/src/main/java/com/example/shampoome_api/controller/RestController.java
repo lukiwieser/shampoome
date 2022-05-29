@@ -29,11 +29,11 @@ public class RestController {
     private Connection connection;
 
     public RestController() {
-        try {
+        /*try {
             connection = DriverManager.getConnection("sqlEndpoint", "username", "password");
         } catch (SQLException e) {
             logger.severe(e.getMessage());
-        }
+        }*/
     }
 
     @PostMapping( "preferences")
