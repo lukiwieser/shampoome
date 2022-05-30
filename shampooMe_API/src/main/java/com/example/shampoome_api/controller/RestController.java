@@ -16,7 +16,7 @@ import java.sql.*;
 import java.util.logging.Logger;
 
 @org.springframework.web.bind.annotation.RestController
-@CrossOrigin(origins = "http://wfm.ngdevs.net")
+@CrossOrigin(origins = "http://wfm.ngdevs.net/")
 public class RestController {
 
     private final String camundaEndpoint = "http://lva924-server3.ec.tuwien.ac.at:8081/engine-rest/";
