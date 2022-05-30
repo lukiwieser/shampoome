@@ -16,7 +16,7 @@ public class WebConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/").allowedOrigins("https://wfm.ngdevs.net");
+                registry.addMapping("/").allowedOrigins("https://wfm.ngdevs.net").allowedOrigins("http://wfm.ngdevs.net");
             }
         };
     }
