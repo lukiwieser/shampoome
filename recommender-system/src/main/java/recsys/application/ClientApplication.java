@@ -1,15 +1,27 @@
-import java.util.logging.Logger;
-import java.awt.Desktop;
-import java.net.URI;
+package recsys.application;
 
 import org.camunda.bpm.client.ExternalTaskClient;
 import org.camunda.bpm.engine.variable.VariableMap;
 import org.camunda.bpm.engine.variable.Variables;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import recsys.application.entities.OrderToPersist;
+import recsys.application.entities.Shampoo;
 
-public class Client {
-    private final static Logger LOGGER = Logger.getLogger(Client.class.getName());
+@SpringBootApplication
+public class ClientApplication implements CommandLineRunner {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(ClientApplication.class);
 
     public static void main(String[] args) {
+        SpringApplication.run(ClientApplication.class, args);
+    }
+
+    @Override
+    public void run(String[] args) {
         LOGGER.info("starting client...");
 
         ExternalTaskClient client = ExternalTaskClient.create()
@@ -179,6 +191,42 @@ public class Client {
                     */
                     // Complete the task
                     externalTaskService.complete(externalTask, variables);
+                })
+                .open();
+
+        client.subscribe("save-order")
+                .lockDuration(1000) // the default lock duration is 20 seconds, but you can override this
+                .handler((externalTask, externalTaskService) -> {
+                    // Put your business logic here
+                    LOGGER.info("i am working on saving the order...");
+
+                    OrderToPersist order = new OrderToPersist();
+
+                    order.setMatriculationNumber(externalTask.getVariable("matriculationNumber"));
+                    LOGGER.info("order matrNumber: " + order.getMatriculationNumber());
+                    order.setNickName(externalTask.getVariable("nickName"));
+                    LOGGER.info("order nickName: " + order.getNickName());
+                    order.setAddress(externalTask.getVariable("shippingAddress"));
+                    LOGGER.info("order address: " + order.getAddress());
+                    order.setIngredients(externalTask.getVariable("ingredients"));
+                    LOGGER.info("order ingredients: " + order.getIngredients());
+                    order.setPrice(externalTask.getVariable("cost"));
+                    LOGGER.info("order price: " + order.getPrice());
+                    order.setStatus("order_placed");
+                    LOGGER.info("order status: " + order.getStatus());
+                    order.setBottleSize(externalTask.getVariable("bottleSizeActual"));
+                    LOGGER.info("order bottleSize: " + order.getBottleSize());
+                    order.setDelayed(false);
+                    LOGGER.info("order delayed: " + order.isDelayed());
+                    order.setDescription(externalTask.getVariable("description"));
+                    LOGGER.info("order description: " + order.getDescription());
+                    order.setProcessId(externalTask.getVariable("processId"));
+                    LOGGER.info("order processId: " + order.getProcessId());
+
+                    //TODO: save this order in the database
+
+                    externalTaskService.complete(externalTask);
+
                 })
                 .open();
     }
