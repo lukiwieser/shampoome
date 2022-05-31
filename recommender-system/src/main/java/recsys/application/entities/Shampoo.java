@@ -1,3 +1,5 @@
+package recsys.application.entities;
+
 public class Shampoo {
 
     private String ingredients;
