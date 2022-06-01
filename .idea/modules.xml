@@ -2,6 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/engine/Engine.iml" filepath="$PROJECT_DIR$/engine/Engine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/customer-relations/customer-relations.iml" filepath="$PROJECT_DIR$/customer-relations/customer-relations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/delivery/delivery.iml" filepath="$PROJECT_DIR$/delivery/delivery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recommender-system/recommender-system.iml" filepath="$PROJECT_DIR$/recommender-system/recommender-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shampooMe_API/shampooMe_API.iml" filepath="$PROJECT_DIR$/shampooMe_API/shampooMe_API.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/shampoome.iml" filepath="$PROJECT_DIR$/.idea/shampoome.iml" />
     </modules>
   </component>
