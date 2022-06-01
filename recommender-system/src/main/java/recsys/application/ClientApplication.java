@@ -11,6 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import recsys.application.entities.OrderToPersist;
 import recsys.application.entities.Shampoo;
 
+import java.sql.*;
+
 @SpringBootApplication
 public class ClientApplication implements CommandLineRunner {
 
@@ -223,10 +225,41 @@ public class ClientApplication implements CommandLineRunner {
                     order.setProcessId(externalTask.getVariable("processId"));
                     LOGGER.info("order processId: " + order.getProcessId());
 
-                    //TODO: save this order in the database
+                    Connection connection;
+
+                    try {
+                        connection = DriverManager.getConnection("jdbc:mariadb://vm40519.cs.easyname.systems:3306/wfm",
+                                "wfmDbAdmin", "i325&GbGjgtdegaS");
+                        PreparedStatement pstmt = null;
+                        try {
+                            pstmt = connection.prepareStatement("INSERT INTO Orders (MatriculationNumber, Nickname," +
+                                    " Address, Ingredients, Price, Status, bottleSize, isDelayed, description, processId)" +
+                                    " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                            pstmt.setString(1, order.getMatriculationNumber());
+                            pstmt.setString(2, order.getNickName());
+                            pstmt.setString(3, order.getAddress());
+                            pstmt.setString(4, order.getIngredients());
+                            pstmt.setInt(5, order.getPrice());
+                            pstmt.setString(6, order.getStatus());
+                            pstmt.setString(7, order.getBottleSize());
+                            pstmt.setBoolean(8, order.isDelayed());
+                            pstmt.setString(9, order.getDescription());
+                            pstmt.setString(10, order.getProcessId());
+                            pstmt.executeQuery();
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        } finally {
+                            try {
+                                pstmt.close();
+                            } catch (SQLException e) {
+                                LOGGER.warn(e.getMessage());
+                            }
+                        }
+                    } catch (SQLException e) {
+                        LOGGER.warn(e.getMessage());
+                    }
 
                     externalTaskService.complete(externalTask);
-
                 })
                 .open();
     }
