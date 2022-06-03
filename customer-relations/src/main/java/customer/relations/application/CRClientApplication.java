@@ -97,10 +97,10 @@ public class CRClientApplication implements CommandLineRunner {
                         PreparedStatement pstmt = null;
                         try {
 
-                            pstmt = connection.prepareStatement("INSERT INTO Feedback (Id, MatriculationNumber," +
+                            pstmt = connection.prepareStatement("INSERT INTO Feedback (MatriculationNumber," +
                                     " Name, OverallSatisfaction, PriceSatisfaction, Comment, ProcessStartTime, ProcessEndTime," +
                                     " QualityCheckStartTime, QualityCheckEndTime)" +
-                                    " VALUES (uuid(), ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                                    " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
                             pstmt.setString(1, matrNumber);
                             pstmt.setString(2, name);
                             pstmt.setInt(3, overallSatisfaction);
