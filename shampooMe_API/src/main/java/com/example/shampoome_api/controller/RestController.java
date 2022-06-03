@@ -60,7 +60,7 @@ public class RestController {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        CamundaRequestMessage camundaRequestMessage = mapper.MapOrderToCamundaRequestMessage(order);
+        ExtendedCamundaRequestMessage camundaRequestMessage = mapper.MapOrderToCamundaRequestMessage(order);
 
         try {
             HttpEntity<String> camundaRequest = new HttpEntity<>(objectMapper.writeValueAsString(camundaRequestMessage), headers);
