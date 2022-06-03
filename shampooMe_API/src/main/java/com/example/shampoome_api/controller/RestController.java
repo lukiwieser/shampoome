@@ -36,7 +36,7 @@ public class RestController {
     }
 
     @PostMapping( "preferences")
-    public String Preferences(@RequestBody @Validated Preferences preferences) {
+    public ProcessIdResponse Preferences(@RequestBody @Validated Preferences preferences) {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -48,10 +48,10 @@ public class RestController {
             CamundaResponseStartEvent[] messageObjects = objectMapper.readValue(result, CamundaResponseStartEvent[].class);
             String processId = messageObjects[0].getId();
             logger.info(processId); //processId
-            return processId;
+            return new ProcessIdResponse(processId);
         } catch (Exception ex) {
             logger.severe(ex.getMessage());
-            return null;
+            return new ProcessIdResponse();
         }
     }
 
