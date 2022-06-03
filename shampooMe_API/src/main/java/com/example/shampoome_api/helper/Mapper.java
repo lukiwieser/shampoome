@@ -9,8 +9,8 @@ import java.util.*;
 public class Mapper {
 
     @Contract(pure=true)
-    public CamundaRequestMessage MapPreferencesToCamundaRequestMessage(Preferences preferences) {
-        CamundaRequestMessage camundaRequestMessage = new CamundaRequestMessage();
+    public CamundaBaseRequestMessage MapPreferencesToCamundaRequestMessage(Preferences preferences) {
+        CamundaStartRequestMessage camundaRequestMessage = new CamundaStartRequestMessage();
         camundaRequestMessage.setMessageName("StartEvent");
 
         Map<String, Object> map = new HashMap<>();
@@ -44,8 +44,8 @@ public class Mapper {
         return camundaRequestMessage;
     }
 
-    public CamundaRequestMessage MapFeedbackToCamundaRequestMessage(Feedback feedback) {
-        CamundaRequestMessage camundaRequestMessage = new CamundaRequestMessage();
+    public CamundaStartRequestMessage MapFeedbackToCamundaRequestMessage(Feedback feedback) {
+        CamundaStartRequestMessage camundaRequestMessage = new CamundaStartRequestMessage();
         camundaRequestMessage.setMessageName("CustomerFeedback");
 
         Map<String, Object> map = new HashMap<>();
