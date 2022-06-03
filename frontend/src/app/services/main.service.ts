@@ -15,8 +15,8 @@ export class MainService {
 
   // TODO: change to correct api endpoints
 
-  // private baseUri: string = 'http://lva924-server3.ec.tuwien.ac.at:8082/';
-  private baseUri: string = 'http://localhost:8080/';
+  private baseUri: string = 'http://lva924-server3.ec.tuwien.ac.at:8082/';
+  //private baseUri: string = 'http://localhost:8080/';
 
   constructor(
     private http: HttpClient,
@@ -42,10 +42,10 @@ export class MainService {
   }
 
   getOrderStatus(orderId: String) : Observable<Order> {
-    //return this.http.get<Order>(this.baseUri+'order?orderId='+orderId);
+    return this.http.get<Order>(this.baseUri+'order?orderId='+orderId);
 
     // TODO: just for mocking the API remove later
-    return this.http.get<Order>(this.baseUri+'order-status');
+    //return this.http.get<Order>(this.baseUri+'order-status');
   }
 
   postFeeback(feedbackReq: FeedbackReq) : Observable<any> {
