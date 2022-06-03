@@ -40,4 +40,14 @@
             <version>3.0.4</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.6.4</version>
+            </plugin>
+        </plugins>
+    </build>
 </project>
