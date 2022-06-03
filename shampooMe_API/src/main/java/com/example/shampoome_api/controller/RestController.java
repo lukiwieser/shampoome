@@ -63,7 +63,9 @@ public class RestController {
         ExtendedCamundaRequestMessage camundaRequestMessage = mapper.MapOrderToCamundaRequestMessage(order);
 
         try {
-            HttpEntity<String> camundaRequest = new HttpEntity<>(objectMapper.writeValueAsString(camundaRequestMessage), headers);
+            String jsonObject = objectMapper.writeValueAsString(camundaRequestMessage);
+            logger.info("send order message to camunda: " + jsonObject);
+            HttpEntity<String> camundaRequest = new HttpEntity<>(jsonObject, headers);
             String result = restTemplate.postForObject(camundaEndpoint + "message", camundaRequest, String.class);
             logger.info(result);
             return result;
@@ -82,7 +84,9 @@ public class RestController {
         CamundaRequestMessage camundaRequestMessage = mapper.MapFeedbackToCamundaRequestMessage(feedback);
 
         try {
-            HttpEntity<String> camundaRequest = new HttpEntity<>(objectMapper.writeValueAsString(camundaRequestMessage), headers);
+            String jsonObject = objectMapper.writeValueAsString(camundaRequestMessage);
+            HttpEntity<String> camundaRequest = new HttpEntity<>(jsonObject, headers);
+            logger.info("send feedback message to camunda: " + jsonObject);
             String result = new RestTemplate().postForObject(camundaEndpoint + "message", camundaRequest, String.class);
 
             logger.info(result);
@@ -124,7 +128,7 @@ public class RestController {
         PreparedStatement pstmt = null;
         String result = null;
         try {
-            pstmt = connection.prepareStatement("select * from orders order where processId = ? limit 1");
+            pstmt = connection.prepareStatement("select * from orders order where processId = ?");
             pstmt.setString(1, processId);
             ResultSet rs = pstmt.executeQuery();
 
@@ -148,7 +152,7 @@ public class RestController {
         PreparedStatement pstmt = null;
         OrderOutput result = null;
         try {
-            pstmt = connection.prepareStatement("select * from orders order where orderId = ? limit 1");
+            pstmt = connection.prepareStatement("select * from orders order where orderId = ?");
             pstmt.setString(1, orderId);
             ResultSet rs = pstmt.executeQuery();
 
