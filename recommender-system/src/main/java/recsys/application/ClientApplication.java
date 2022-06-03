@@ -232,9 +232,9 @@ public class ClientApplication implements CommandLineRunner {
                                 "wfmDbAdmin", "i325&GbGjgtdegaS");
                         PreparedStatement pstmt = null;
                         try {
-                            pstmt = connection.prepareStatement("INSERT INTO Orders (MatriculationNumber, Nickname," +
+                            pstmt = connection.prepareStatement("INSERT INTO Orders (Id, MatriculationNumber, Nickname," +
                                     " Address, Ingredients, Price, Status, bottleSize, isDelayed, description, processId)" +
-                                    " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                                    " VALUES (uuid(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                             pstmt.setString(1, order.getMatriculationNumber());
                             pstmt.setString(2, order.getNickName());
                             pstmt.setString(3, order.getAddress());
