@@ -124,7 +124,7 @@ public class RestController {
         PreparedStatement pstmt = null;
         String result = null;
         try {
-            pstmt = connection.prepareStatement("select top 1 from orders order where processId = ?");
+            pstmt = connection.prepareStatement("select * from orders order where processId = ? limit 1");
             pstmt.setString(1, processId);
             ResultSet rs = pstmt.executeQuery();
 
@@ -148,7 +148,7 @@ public class RestController {
         PreparedStatement pstmt = null;
         OrderOutput result = null;
         try {
-            pstmt = connection.prepareStatement("select top 1 from orders order where orderId = ?");
+            pstmt = connection.prepareStatement("select * from orders order where orderId = ? limit 1");
             pstmt.setString(1, orderId);
             ResultSet rs = pstmt.executeQuery();
 
