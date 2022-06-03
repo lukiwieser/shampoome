@@ -1,9 +1,6 @@
 package com.example.shampoome_api.helper;
 
-import com.example.shampoome_api.model.CamundaRequestMessage;
-import com.example.shampoome_api.model.Feedback;
-import com.example.shampoome_api.model.OrderInput;
-import com.example.shampoome_api.model.Preferences;
+import com.example.shampoome_api.model.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,15 +31,15 @@ public class Mapper {
     }
 
     @Contract(pure = true)
-    public CamundaRequestMessage MapOrderToCamundaRequestMessage(OrderInput order) {
-        CamundaRequestMessage camundaRequestMessage = new CamundaRequestMessage();
+    public ExtendedCamundaRequestMessage MapOrderToCamundaRequestMessage(OrderInput order) {
+        ExtendedCamundaRequestMessage camundaRequestMessage = new ExtendedCamundaRequestMessage();
         camundaRequestMessage.setMessageName("CustomerOrder");
 
         Map<String, Object> map = new HashMap<>();
-        map.put("processId", order.processId);
         map.put("shippingAddress", order.shippingAddress);
         map.put("matriculationNumber", order.matriculationNumber);
         camundaRequestMessage.setProcessVariables(createProcessVariables(map));
+        camundaRequestMessage.processInstanceId = order.processId;
 
         return camundaRequestMessage;
     }
