@@ -139,7 +139,10 @@ public class RestController {
             throw new RuntimeException(e);
         } finally {
             try {
-                pstmt.close();
+                if(pstmt != null) {
+                    pstmt.close();
+                    connection.close();
+                }
             } catch (SQLException e) {
                 logger.error(e.getMessage());
                 throw new RuntimeException(e);
@@ -165,7 +168,10 @@ public class RestController {
             throw new RuntimeException(e);
         } finally {
             try {
-                if(pstmt != null) pstmt.close();
+                if(pstmt != null) {
+                    pstmt.close();
+                    connection.close();
+                }
             } catch (SQLException e) {
                 logger.error(e.getMessage());
                 throw new RuntimeException(e);
