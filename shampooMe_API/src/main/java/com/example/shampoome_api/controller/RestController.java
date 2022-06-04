@@ -158,7 +158,7 @@ public class RestController {
                 result = GetOrderFromResultSet(rs);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.severe(e.getMessage());
         } finally {
             try {
                 pstmt.close();
