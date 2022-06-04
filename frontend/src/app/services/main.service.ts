@@ -15,8 +15,8 @@ export class MainService {
 
   // TODO: change to correct api endpoints
 
-  private baseUri: string = 'http://lva924-server3.ec.tuwien.ac.at:8082/';
-  //private baseUri: string = 'http://localhost:8080/';
+  //private baseUri: string = 'http://lva924-server3.ec.tuwien.ac.at:8082/';
+  private baseUri: string = 'http://localhost:8080/';
 
   constructor(
     private http: HttpClient,
