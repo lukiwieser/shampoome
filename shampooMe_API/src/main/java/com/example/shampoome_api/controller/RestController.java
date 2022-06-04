@@ -106,13 +106,13 @@ public class RestController {
             logger.info(result);
             CamundaResponseShampoo messageObjects = objectMapper.readValue(result, CamundaResponseShampoo.class);
             Shampoo shampoo = new Shampoo();
-            shampoo.setNickName(messageObjects.getNickName());
-            shampoo.setIngredients(messageObjects.getIngredients());
-            shampoo.setDescription(messageObjects.getDescription());
-            shampoo.setBottleSize(messageObjects.getBottleSize());
-            shampoo.setCost(messageObjects.getCost());
-            if(shampoo.getIngredients() == null || shampoo.getDescription() == null ||
-                    shampoo.getBottleSize() == null || shampoo.getCost() == null) {
+            shampoo.nickName = (messageObjects.getNickName());
+            shampoo.ingredients = (messageObjects.getIngredients());
+            shampoo.description = (messageObjects.getDescription());
+            shampoo.bottleSize = (messageObjects.getBottleSize());
+            shampoo.price =(messageObjects.getCost());
+            if(shampoo.ingredients == null || shampoo.description == null ||
+                    shampoo.bottleSize == null || shampoo.price == null) {
                 return new Shampoo();
             } else {
                 return shampoo;
@@ -174,9 +174,9 @@ public class RestController {
         OrderOutput orderOutput = new OrderOutput();
         orderOutput.orderId = rs.getString("Id");
         orderOutput.processId = rs.getString("processId");
-        orderOutput.NickName = rs.getString("Nickname");
-        orderOutput.MatriculationNumber = rs.getString("MatriculationNumber");
-        orderOutput.ShippingAddress = rs.getString("Address");
+        orderOutput.nickName = rs.getString("Nickname");
+        orderOutput.matriculationNumber = rs.getString("MatriculationNumber");
+        orderOutput.shippingAddress = rs.getString("Address");
         orderOutput.ingredients = rs.getString("Ingredients");
         orderOutput.price = rs.getInt("Price");
         orderOutput.bottleSize = rs.getString("bottleSize");
