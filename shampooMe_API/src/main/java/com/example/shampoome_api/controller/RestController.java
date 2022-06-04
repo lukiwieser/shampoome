@@ -17,7 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.sql.*;
 
 @org.springframework.web.bind.annotation.RestController
-@CrossOrigin(origins = "http://wfm.ngdevs.net/")
+@CrossOrigin(origins = {"http://wfm.ngdevs.net/", "http://localhost:4200/"})
 public class RestController {
 
     private final String camundaEndpoint = "http://lva924-server3.ec.tuwien.ac.at:8081/engine-rest/";
@@ -28,7 +28,7 @@ public class RestController {
     private Connection connection;
 
     private Connection getConnection() throws SQLException {
-        if(connection.isClosed()) {
+        if(connection == null || connection.isClosed()) {
             connection = DriverManager.getConnection("jdbc:mariadb://vm40519.cs.easyname.systems:3306/wfm",
                     "wfmDbAdmin", "i325&GbGjgtdegaS");
         }
