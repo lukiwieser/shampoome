@@ -136,7 +136,7 @@ public class RestController {
                 result = GetOrderFromResultSet(rs).orderId;
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.severe(e.getMessage());
         } finally {
             try {
                 pstmt.close();
@@ -173,8 +173,8 @@ public class RestController {
 
     private OrderOutput GetOrderFromResultSet(ResultSet rs) throws SQLException {
         OrderOutput orderOutput = new OrderOutput();
-        orderOutput.orderId = rs.getString("orderId");
-        orderOutput.processId = rs.getString("ProcessId");
+        orderOutput.orderId = rs.getString("Id");
+        orderOutput.processId = rs.getString("processId");
         orderOutput.NickName = rs.getString("Nickname");
         orderOutput.MatriculationNumber = rs.getString("MatriculationNumber");
         orderOutput.ShippingAddress = rs.getString("Address");
