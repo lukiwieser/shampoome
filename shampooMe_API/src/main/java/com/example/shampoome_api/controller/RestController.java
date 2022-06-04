@@ -22,7 +22,7 @@ public class RestController {
 
     private final String camundaEndpoint = "http://lva924-server3.ec.tuwien.ac.at:8081/engine-rest/";
 
-    private Logger logger = LoggerFactory.getLogger(RestController.class);
+    private final static Logger logger = LoggerFactory.getLogger(RestController.class);
     private ObjectMapper objectMapper = new ObjectMapper();
     private Mapper mapper = new Mapper();
     private Connection connection;
