@@ -146,7 +146,7 @@ public class RestController {
     }
 
     @GetMapping("order")
-    public OrderOutput GetOrder(String orderId) {
+    public OrderOutput GetOrder(@RequestParam String orderId) {
         PreparedStatement pstmt = null;
         OrderOutput result = null;
         try {
@@ -161,7 +161,7 @@ public class RestController {
             logger.severe(e.getMessage());
         } finally {
             try {
-                pstmt.close();
+                if(pstmt != null) pstmt.close();
             } catch (SQLException e) {
                 logger.severe(e.getMessage());
             }
