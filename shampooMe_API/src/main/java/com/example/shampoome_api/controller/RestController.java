@@ -124,16 +124,15 @@ public class RestController {
     }
 
     @GetMapping("order-id")
-    public String GetOrderId(@RequestParam String processId) {
+    public GetOrderIdResponse GetOrderId(@RequestParam String processId) {
         PreparedStatement pstmt = null;
-        String result = null;
         try {
-            pstmt = connection.prepareStatement("select * from orders order where processId = ?");
+            pstmt = connection.prepareStatement("select * from Orders where processId = ?");
             pstmt.setString(1, processId);
             ResultSet rs = pstmt.executeQuery();
 
             if(rs.next()) {
-                result = GetOrderFromResultSet(rs).orderId;
+                return new GetOrderIdResponse(GetOrderFromResultSet(rs).orderId);
             }
         } catch (SQLException e) {
             logger.severe(e.getMessage());
@@ -144,7 +143,7 @@ public class RestController {
                 logger.severe(e.getMessage());
             }
         }
-        return result;
+        return new GetOrderIdResponse();
     }
 
     @GetMapping("order")
@@ -152,7 +151,7 @@ public class RestController {
         PreparedStatement pstmt = null;
         OrderOutput result = null;
         try {
-            pstmt = connection.prepareStatement("select * from orders order where orderId = ?");
+            pstmt = connection.prepareStatement("select * from Orders where orderId = ?");
             pstmt.setString(1, orderId);
             ResultSet rs = pstmt.executeQuery();
 
