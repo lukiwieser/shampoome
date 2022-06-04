@@ -135,11 +135,13 @@ public class RestController {
             }
         } catch (SQLException e) {
             logger.severe(e.getMessage());
+            throw new RuntimeException(e);
         } finally {
             try {
                 pstmt.close();
             } catch (SQLException e) {
                 logger.severe(e.getMessage());
+                throw new RuntimeException(e);
             }
         }
         return new GetOrderIdResponse();
@@ -159,11 +161,13 @@ public class RestController {
             }
         } catch (SQLException e) {
             logger.severe(e.getMessage());
+            throw new RuntimeException(e);
         } finally {
             try {
                 if(pstmt != null) pstmt.close();
             } catch (SQLException e) {
                 logger.severe(e.getMessage());
+                throw new RuntimeException(e);
             }
         }
         return result;
