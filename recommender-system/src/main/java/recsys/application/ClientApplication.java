@@ -221,9 +221,10 @@ public class ClientApplication implements CommandLineRunner {
                     order.setDelayed(false);
                     LOGGER.info("order delayed: " + order.isDelayed());
                     order.setDescription(externalTask.getVariable("description"));
-                    LOGGER.info("order description: " + order.getDescription());
-                    order.setProcessId(externalTask.getVariable("processId"));
-                    LOGGER.info("order processId: " + order.getProcessId());
+                    LOGGER.info("order description: " + externalTask.getVariable("description"));
+                    order.setProcessId(externalTask.getProcessInstanceId());
+                    LOGGER.info("order processId: " + externalTask.getProcessInstanceId());
+
 
                     Connection connection;
 
@@ -244,10 +245,11 @@ public class ClientApplication implements CommandLineRunner {
                             pstmt.setString(7, order.getBottleSize());
                             pstmt.setBoolean(8, order.isDelayed());
                             pstmt.setString(9, order.getDescription());
+                            LOGGER.info("processId from getProcessId: " + order.getProcessId());
                             pstmt.setString(10, order.getProcessId());
                             pstmt.executeQuery();
                         } catch (SQLException e) {
-                            throw new RuntimeException(e);
+                            LOGGER.error(e.getMessage());
                         } finally {
                             try {
                                 pstmt.close();
@@ -256,7 +258,7 @@ public class ClientApplication implements CommandLineRunner {
                             }
                         }
                     } catch (SQLException e) {
-                        LOGGER.warn(e.getMessage());
+                        LOGGER.error(e.getMessage());
                     }
 
                     externalTaskService.complete(externalTask);
