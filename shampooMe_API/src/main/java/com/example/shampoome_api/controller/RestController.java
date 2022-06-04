@@ -3,6 +3,8 @@ package com.example.shampoome_api.controller;
 import com.example.shampoome_api.helper.Mapper;
 import com.example.shampoome_api.model.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,7 +15,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.*;
-import java.util.logging.Logger;
 
 @org.springframework.web.bind.annotation.RestController
 @CrossOrigin(origins = "http://wfm.ngdevs.net/")
@@ -21,7 +22,7 @@ public class RestController {
 
     private final String camundaEndpoint = "http://lva924-server3.ec.tuwien.ac.at:8081/engine-rest/";
 
-    private Logger logger = Logger.getLogger(RestController.class.getName());
+    private Logger logger = LoggerFactory.getLogger(RestController.class);
     private ObjectMapper objectMapper = new ObjectMapper();
     private Mapper mapper = new Mapper();
     private Connection connection;
@@ -49,7 +50,7 @@ public class RestController {
             logger.info(processId); //processId
             return new ProcessIdResponse(processId);
         } catch (Exception ex) {
-            logger.severe(ex.getMessage());
+            logger.error(ex.getMessage());
             return new ProcessIdResponse();
         }
     }
@@ -69,7 +70,7 @@ public class RestController {
             logger.info(result);
             return result;
         } catch (Exception ex) {
-            logger.severe(ex.getMessage());
+            logger.error(ex.getMessage());
             return null;
         }
     }
@@ -91,7 +92,7 @@ public class RestController {
             logger.info(result);
             return result;
         } catch (Exception ex) {
-            logger.severe(ex.getMessage());
+            logger.error(ex.getMessage());
             return null;
         }
     }
@@ -117,7 +118,7 @@ public class RestController {
                 return shampoo;
             }
         } catch (Exception ex) {
-            logger.severe(ex.getMessage());
+            logger.error(ex.getMessage());
             return null;
         }
     }
@@ -134,13 +135,13 @@ public class RestController {
                 return new GetOrderIdResponse(GetOrderFromResultSet(rs).orderId);
             }
         } catch (SQLException e) {
-            logger.severe(e.getMessage());
+            logger.error(e.getMessage());
             throw new RuntimeException(e);
         } finally {
             try {
                 pstmt.close();
             } catch (SQLException e) {
-                logger.severe(e.getMessage());
+                logger.error(e.getMessage());
                 throw new RuntimeException(e);
             }
         }
@@ -160,13 +161,13 @@ public class RestController {
                 result = GetOrderFromResultSet(rs);
             }
         } catch (SQLException e) {
-            logger.severe(e.getMessage());
+            logger.error(e.getMessage());
             throw new RuntimeException(e);
         } finally {
             try {
                 if(pstmt != null) pstmt.close();
             } catch (SQLException e) {
-                logger.severe(e.getMessage());
+                logger.error(e.getMessage());
                 throw new RuntimeException(e);
             }
         }
@@ -193,7 +194,7 @@ public class RestController {
         try {
             new RestTemplate().getForObject(camundaEndpoint + "process-instance/" + processId, String.class);
         } catch (Exception ex) {
-            logger.warning(ex.getMessage());
+            logger.warn(ex.getMessage());
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "the process with the given id could not be found");
         }
     }
