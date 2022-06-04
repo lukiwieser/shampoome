@@ -26,13 +26,12 @@ public class RestController {
     private Mapper mapper = new Mapper();
     private Connection connection;
 
-    public RestController() {
-        try {
+    private Connection getConnection() throws SQLException {
+        if(connection.isClosed()) {
             connection = DriverManager.getConnection("jdbc:mariadb://vm40519.cs.easyname.systems:3306/wfm",
                     "wfmDbAdmin", "i325&GbGjgtdegaS");
-        } catch (SQLException e) {
-            logger.severe(e.getMessage());
         }
+        return connection;
     }
 
     @PostMapping( "preferences")
@@ -127,7 +126,7 @@ public class RestController {
     public GetOrderIdResponse GetOrderId(@RequestParam String processId) {
         PreparedStatement pstmt = null;
         try {
-            pstmt = connection.prepareStatement("select * from Orders where processId = ?");
+            pstmt = getConnection().prepareStatement("select * from Orders where processId = ?");
             pstmt.setString(1, processId);
             ResultSet rs = pstmt.executeQuery();
 
@@ -151,7 +150,7 @@ public class RestController {
         PreparedStatement pstmt = null;
         OrderOutput result = null;
         try {
-            pstmt = connection.prepareStatement("select * from Orders where Id = ?");
+            pstmt = getConnection().prepareStatement("select * from Orders where Id = ?");
             pstmt.setString(1, orderId);
             ResultSet rs = pstmt.executeQuery();
 
