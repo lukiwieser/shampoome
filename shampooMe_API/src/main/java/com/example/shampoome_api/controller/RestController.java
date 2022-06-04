@@ -109,7 +109,7 @@ public class RestController {
             shampoo.nickName = (messageObjects.getNickName());
             shampoo.ingredients = (messageObjects.getIngredients());
             shampoo.description = (messageObjects.getDescription());
-            shampoo.bottleSize = (messageObjects.getBottleSize());
+            shampoo.bottleSize = "" + messageObjects.getBottleSize().charAt(0);
             shampoo.price =(messageObjects.getCost());
             if(shampoo.ingredients == null || shampoo.description == null ||
                     shampoo.bottleSize == null || shampoo.price == null) {
@@ -151,7 +151,7 @@ public class RestController {
         PreparedStatement pstmt = null;
         OrderOutput result = null;
         try {
-            pstmt = connection.prepareStatement("select * from Orders where orderId = ?");
+            pstmt = connection.prepareStatement("select * from Orders where Id = ?");
             pstmt.setString(1, orderId);
             ResultSet rs = pstmt.executeQuery();
 
