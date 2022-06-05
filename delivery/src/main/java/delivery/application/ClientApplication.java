@@ -32,7 +32,7 @@ public class ClientApplication implements CommandLineRunner {
                 .lockDuration(1000) // the default lock duration is 20 seconds, but you can override this
                 .handler((externalTask, externalTaskService) -> {
                     LOGGER.info("i am setting the delivery status...");
-                    String processId = externalTask.getVariable("processId");
+                    String processId = externalTask.getProcessInstanceId();
 
                     Connection connection;
 
@@ -83,7 +83,7 @@ public class ClientApplication implements CommandLineRunner {
                 .lockDuration(1000) // the default lock duration is 20 seconds, but you can override this
                 .handler((externalTask, externalTaskService) -> {
                     LOGGER.info("i am setting the delivery status...");
-                    String processId = externalTask.getVariable("processId");
+                    String processId = externalTask.getProcessInstanceId();
 
                     Connection connection;
 
