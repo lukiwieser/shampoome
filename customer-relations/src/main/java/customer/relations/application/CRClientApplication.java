@@ -32,7 +32,7 @@ public class CRClientApplication implements CommandLineRunner {
                 .lockDuration(1000) // the default lock duration is 20 seconds, but you can override this
                 .handler((externalTask, externalTaskService) -> {
                     LOGGER.info("i am setting delivery status...");
-                    String processId = externalTask.getVariable("processId");
+                    String processId = externalTask.getProcessInstanceId();
 
                     Connection connection;
 
@@ -69,8 +69,6 @@ public class CRClientApplication implements CommandLineRunner {
                 .handler((externalTask, externalTaskService) -> {
                     LOGGER.info("i am saving feedback and KPIs...");
 
-
-                    String processId = externalTask.getVariable("processId");
                     String matrNumber = externalTask.getVariable("matriculationNumber");
                     String name = externalTask.getVariable("nickName");
                     int overallSatisfaction = externalTask.getVariable("overallSatisfaction");
