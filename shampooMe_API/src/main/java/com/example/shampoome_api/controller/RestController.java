@@ -81,7 +81,7 @@ public class RestController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        CamundaBaseRequestMessage camundaRequestMessage = mapper.MapFeedbackToCamundaRequestMessage(feedback);
+        ExtendedCamundaRequestMessage camundaRequestMessage = mapper.MapFeedbackToCamundaRequestMessage(feedback);
 
         try {
             String jsonObject = objectMapper.writeValueAsString(camundaRequestMessage);

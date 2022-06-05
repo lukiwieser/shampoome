@@ -44,16 +44,16 @@ public class Mapper {
         return camundaRequestMessage;
     }
 
-    public CamundaStartRequestMessage MapFeedbackToCamundaRequestMessage(Feedback feedback) {
-        CamundaStartRequestMessage camundaRequestMessage = new CamundaStartRequestMessage();
+    public ExtendedCamundaRequestMessage MapFeedbackToCamundaRequestMessage(Feedback feedback) {
+        ExtendedCamundaRequestMessage camundaRequestMessage = new ExtendedCamundaRequestMessage();
         camundaRequestMessage.setMessageName("CustomerFeedback");
 
         Map<String, Object> map = new HashMap<>();
-        map.put("processId", feedback.processId);
         map.put("overallSatisfaction", feedback.overallSatisfaction);
         map.put("priceSatisfaction", feedback.priceSatisfaction);
-        map.put("comment", feedback.comment);
+        map.put("comment", feedback.comments);
         camundaRequestMessage.setProcessVariables(createProcessVariables(map));
+        camundaRequestMessage.processInstanceId = feedback.processId;
 
         return camundaRequestMessage;
     }

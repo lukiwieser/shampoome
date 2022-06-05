@@ -17,5 +17,5 @@ public class Feedback {
     public int priceSatisfaction;
 
     @Pattern(regexp = "^[0-9a-zA-Z .]*$")
-    public String comment;
+    public String comments;
 }
