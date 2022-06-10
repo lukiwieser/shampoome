@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Map;
 
 @SpringBootApplication
 public class CRClientApplication implements CommandLineRunner {
@@ -71,9 +72,22 @@ public class CRClientApplication implements CommandLineRunner {
 
                     String matrNumber = externalTask.getVariable("matriculationNumber");
                     String name = externalTask.getVariable("nickName");
-                    int overallSatisfaction = externalTask.getVariable("overallSatisfaction");
-                    int priceSatisfaction = externalTask.getVariable("priceSatisfaction");
-                    String comment = externalTask.getVariable("comment");
+
+                    //check if process variables for feedback have been set
+                    int overallSatisfaction = 0;
+                    int priceSatisfaction = 0;
+                    String comment = null;
+                    Map<String, Object> allVar = externalTask.getAllVariables();
+                    if(allVar.containsKey("overallSatisfaction")) {
+                        overallSatisfaction = externalTask.getVariable("overallSatisfaction");
+                    }
+                    if(allVar.containsKey("priceSatisfaction")) {
+                        priceSatisfaction = externalTask.getVariable("priceSatisfaction");
+                    }
+                    if(allVar.containsKey("comment")) {
+                        comment = externalTask.getVariable("comment");
+                    }
+
                     Date processStartTime = externalTask.getVariable("ProcessStartTime");
                     Timestamp sqlProcessStartTime = new Timestamp(processStartTime.getTime());
                     LOGGER.info("processStartTime: " + processStartTime);
