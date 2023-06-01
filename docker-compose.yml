@@ -8,3 +8,8 @@ services:
     ports:
       - 8081:8081
     restart: always
+    volumes:
+      - camunda-db:/opt/app/db
+
+volumes:
+  camunda-db:
