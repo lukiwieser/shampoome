@@ -1,9 +1,9 @@
 version: '3'
 
 services:
-  engine:
+  camunda:
     build:
-      context: ./Engine
+      context: ./camunda
       dockerfile: Dockerfile
     ports:
       - 8081:8081

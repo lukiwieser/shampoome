@@ -7,10 +7,10 @@ RUN mvn package
 
 FROM adoptopenjdk/openjdk11:alpine-jre
 
-ARG JAR_FILE=spring-boot-engine.jar
+ARG JAR_FILE=camunda.jar
 
 WORKDIR /opt/app
 
 COPY --from=maven /usr/src/app/target/${JAR_FILE} /opt/app/
 
-ENTRYPOINT ["java","-jar","spring-boot-engine.jar"]
+ENTRYPOINT ["java","-jar","camunda.jar"]
