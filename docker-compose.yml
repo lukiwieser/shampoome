@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  engine:
+    build:
+      context: ./Engine
+      dockerfile: Dockerfile
+    ports:
+      - 8081:8081
+    restart: always
