@@ -1,6 +1,6 @@
-package com.example.shampoome_api.helper;
+package com.example.api;
 
-import com.example.shampoome_api.model.*;
+import com.example.api.model.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

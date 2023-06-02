@@ -1,4 +1,4 @@
-package com.example.shampoome_api.model;
+package com.example.api.model;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;

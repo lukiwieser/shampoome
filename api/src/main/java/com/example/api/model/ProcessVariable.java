@@ -1,4 +1,4 @@
-package com.example.shampoome_api.model;
+package com.example.api.model;
 
 public class ProcessVariable<T> {
     public EmbeddedValue name;

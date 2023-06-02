@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/shampooMe_API/pom.xml" />
         <option value="$PROJECT_DIR$/delivery/pom.xml" />
         <option value="$PROJECT_DIR$/customer-relations/pom.xml" />
+        <option value="$PROJECT_DIR$/camunda/pom.xml" />
         <option value="$PROJECT_DIR$/api/pom.xml" />
       </list>
     </option>

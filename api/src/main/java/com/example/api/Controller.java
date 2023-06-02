@@ -1,7 +1,6 @@
-package com.example.shampoome_api.controller;
+package com.example.api;
 
-import com.example.shampoome_api.helper.Mapper;
-import com.example.shampoome_api.model.*;
+import com.example.api.model.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,24 +12,20 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.sql.*;
 
-@org.springframework.web.bind.annotation.RestController
+@RestController
 @CrossOrigin(origins = {"http://wfm.ngdevs.net/", "http://localhost:4200/"})
-public class RestController {
-
-    private final String camundaEndpoint = "http://lva924-server3.ec.tuwien.ac.at:8081/engine-rest/";
-
-    private final static Logger logger = LoggerFactory.getLogger(RestController.class);
+public class Controller {
+    private final String camundaEndpoint = "http://camunda:8081/engine-rest/";
+    private final static Logger logger = LoggerFactory.getLogger(Controller.class);
     private ObjectMapper objectMapper = new ObjectMapper();
     private Mapper mapper = new Mapper();
     private Connection connection;
 
     private Connection getConnection() throws SQLException {
         if(connection == null || connection.isClosed()) {
-            connection = DriverManager.getConnection("jdbc:mariadb://vm40519.cs.easyname.systems:3306/wfm",
-                    "wfmDbAdmin", "i325&GbGjgtdegaS");
+            connection = DriverManager.getConnection("jdbc:mariadb://maria-db", "user", "password");
         }
         return connection;
     }

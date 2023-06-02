@@ -1,4 +1,4 @@
-package com.example.shampoome_api.model;
+package com.example.api.model;
 
 import java.util.Dictionary;
 

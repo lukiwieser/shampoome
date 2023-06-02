@@ -10,6 +10,37 @@ services:
     restart: always
     volumes:
       - camunda-db:/opt/app/db
+    networks:
+      - backend
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    restart: always
+    networks:
+      - backend
+
+  maria-db:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - maria-db-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
 
 volumes:
   camunda-db:
+  maria-db-data:
+
+networks:
+  backend:
+    driver: bridge
