@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
-    <file type="web" url="file://$PROJECT_DIR$/api" />
+    <file type="web" url="file://$PROJECT_DIR$/gateway" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -14,6 +14,7 @@
         <option value="$PROJECT_DIR$/customer-relations/pom.xml" />
         <option value="$PROJECT_DIR$/camunda/pom.xml" />
         <option value="$PROJECT_DIR$/api/pom.xml" />
+        <option value="$PROJECT_DIR$/gateway/pom.xml" />
       </list>
     </option>
   </component>

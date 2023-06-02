@@ -13,9 +13,9 @@ services:
     networks:
       - backend
 
-  api:
+  gateway:
     build:
-      context: ./api
+      context: ./gateway
       dockerfile: Dockerfile
     ports:
       - 8080:8080
