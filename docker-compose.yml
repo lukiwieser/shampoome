@@ -34,6 +34,17 @@ services:
       - backend
     restart: always
 
+  delivery:
+    build:
+      context: ./delivery
+      dockerfile: Dockerfile
+    depends_on:
+      camunda:
+        condition: service_healthy
+    networks:
+      - backend
+    restart: always
+
   mariadb:
     image: mariadb
     environment:

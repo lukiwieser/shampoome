@@ -1,4 +1,4 @@
-package delivery.application;
+package shampoome.delivery;
 
 import org.camunda.bpm.client.ExternalTaskClient;
 import org.camunda.bpm.engine.variable.VariableMap;
@@ -24,7 +24,7 @@ public class ClientApplication implements CommandLineRunner {
         LOGGER.info("starting client...");
 
         ExternalTaskClient client = ExternalTaskClient.create()
-                .baseUrl("http://lva924-server3.ec.tuwien.ac.at:8081/engine-rest")
+                .baseUrl("http://camunda:8081/engine-rest")
                 .asyncResponseTimeout(10000) // long polling timeout
                 .build();
         // subscribe to an external task topic as specified in the process
@@ -37,8 +37,8 @@ public class ClientApplication implements CommandLineRunner {
                     Connection connection;
 
                     try {
-                        connection = DriverManager.getConnection("jdbc:mariadb://vm40519.cs.easyname.systems:3306/wfm",
-                                "wfmDbAdmin", "i325&GbGjgtdegaS");
+                        connection = DriverManager.getConnection("jdbc:mariadb://mariadb:3306/mydatabase",
+                                "user", "password");
                         PreparedStatement pstmt = null;
                         try {
                             pstmt = connection.prepareStatement("UPDATE Orders SET Status = ?" +
@@ -88,8 +88,8 @@ public class ClientApplication implements CommandLineRunner {
                     Connection connection;
 
                     try {
-                        connection = DriverManager.getConnection("jdbc:mariadb://vm40519.cs.easyname.systems:3306/wfm",
-                                "wfmDbAdmin", "i325&GbGjgtdegaS");
+                        connection = DriverManager.getConnection("jdbc:mariadb://mariadb:3306/mydatabase",
+                                "user", "password");
                         PreparedStatement pstmt = null;
                         try {
                             pstmt = connection.prepareStatement("UPDATE Orders SET isDelayed = ?" +
