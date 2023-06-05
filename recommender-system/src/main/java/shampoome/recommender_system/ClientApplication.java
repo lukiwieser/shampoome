@@ -1,4 +1,4 @@
-package recsys.application;
+package shampoome.recommender_system;
 
 import org.camunda.bpm.client.ExternalTaskClient;
 import org.camunda.bpm.engine.variable.VariableMap;
@@ -8,8 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import recsys.application.entities.OrderToPersist;
-import recsys.application.entities.Shampoo;
+import shampoome.recommender_system.entities.OrderToPersist;
+import shampoome.recommender_system.entities.Shampoo;
 
 import java.sql.*;
 
@@ -27,7 +27,7 @@ public class ClientApplication implements CommandLineRunner {
         LOGGER.info("starting client...");
 
         ExternalTaskClient client = ExternalTaskClient.create()
-                .baseUrl("http://lva924-server3.ec.tuwien.ac.at:8081/engine-rest")
+                .baseUrl("http://camunda:8081/engine-rest")
                 .asyncResponseTimeout(10000) // long polling timeout
                 .build();
 
@@ -229,8 +229,8 @@ public class ClientApplication implements CommandLineRunner {
                     Connection connection;
 
                     try {
-                        connection = DriverManager.getConnection("jdbc:mariadb://vm40519.cs.easyname.systems:3306/wfm",
-                                "wfmDbAdmin", "i325&GbGjgtdegaS");
+                        connection = DriverManager.getConnection("jdbc:mariadb://mariadb:3306",
+                                "user", "password");
                         PreparedStatement pstmt = null;
                         try {
                             pstmt = connection.prepareStatement("INSERT INTO Orders (MatriculationNumber, Nickname," +

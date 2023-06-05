@@ -1,4 +1,4 @@
-package recsys.application.entities;
+package shampoome.recommender_system.entities;
 
 public class Shampoo {
 

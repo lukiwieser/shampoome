@@ -23,6 +23,17 @@ services:
       - backend
     restart: always
 
+  recommender-system:
+    build:
+      context: ./recommender-system
+      dockerfile: Dockerfile
+    depends_on:
+      camunda:
+        condition: service_healthy
+    networks:
+      - backend
+    restart: always
+
   mariadb:
     image: mariadb
     environment:
