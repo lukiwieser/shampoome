@@ -25,7 +25,7 @@ public class Controller {
 
     private Connection getConnection() throws SQLException {
         if(connection == null || connection.isClosed()) {
-            connection = DriverManager.getConnection("jdbc:mariadb://maria-db", "user", "password");
+            connection = DriverManager.getConnection("jdbc:mariadb://mariadb/mydatabase", "user", "password");
         }
         return connection;
     }
@@ -63,6 +63,7 @@ public class Controller {
             HttpEntity<String> camundaRequest = new HttpEntity<>(jsonObject, headers);
             String result = restTemplate.postForObject(camundaEndpoint + "message", camundaRequest, String.class);
             logger.info(result);
+            // TODO: return null / empty string
             return result;
         } catch (Exception ex) {
             logger.error(ex.getMessage());
@@ -120,6 +121,7 @@ public class Controller {
 
     @GetMapping("order-id")
     public GetOrderIdResponse GetOrderId(@RequestParam String processId) {
+        logger.info("getOrderId(processId=" + processId + ")");
         PreparedStatement pstmt = null;
         try {
             pstmt = getConnection().prepareStatement("select * from Orders where processId = ?");

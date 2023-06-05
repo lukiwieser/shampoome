@@ -225,11 +225,10 @@ public class ClientApplication implements CommandLineRunner {
                     order.setProcessId(externalTask.getProcessInstanceId());
                     LOGGER.info("order processId: " + externalTask.getProcessInstanceId());
 
-
                     Connection connection;
 
                     try {
-                        connection = DriverManager.getConnection("jdbc:mariadb://mariadb:3306",
+                        connection = DriverManager.getConnection("jdbc:mariadb://mariadb:3306/mydatabase",
                                 "user", "password");
                         PreparedStatement pstmt = null;
                         try {
@@ -260,8 +259,6 @@ public class ClientApplication implements CommandLineRunner {
                     } catch (SQLException e) {
                         LOGGER.error(e.getMessage());
                     }
-
-                    externalTaskService.complete(externalTask);
                 })
                 .open();
     }
