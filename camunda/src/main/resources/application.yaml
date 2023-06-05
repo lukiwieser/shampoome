@@ -6,3 +6,7 @@ camunda.bpm.admin-user:
   password: demo
 server:
   port: 8081
+camunda.bpm:
+    deployment-resource-pattern:
+      - classpath*:**/*.bpmn
+      - classpath*:**/*.form

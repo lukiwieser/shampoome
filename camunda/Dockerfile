@@ -12,5 +12,6 @@ ARG JAR_FILE=camunda.jar
 WORKDIR /opt/app
 
 COPY --from=maven /usr/src/app/target/${JAR_FILE} /opt/app/
+COPY --from=maven /usr/src/app/target/classes /opt/app/classes
 
 ENTRYPOINT ["java","-jar","camunda.jar"]

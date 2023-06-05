@@ -4,7 +4,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.example.workflow</groupId>
+  <groupId>shampoome.camunda</groupId>
   <artifactId>camunda</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
@@ -84,7 +84,7 @@
         <artifactId>spring-boot-maven-plugin</artifactId>
         <version>2.6.4</version>
         <configuration>
-          <mainClass>com.example.workflow.Application</mainClass>
+          <mainClass>shampoome.camunda.Application</mainClass>
           <layout>JAR</layout>
         </configuration>
         <executions>
