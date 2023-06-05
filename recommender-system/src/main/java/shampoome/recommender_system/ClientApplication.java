@@ -247,6 +247,8 @@ public class ClientApplication implements CommandLineRunner {
                             LOGGER.info("processId from getProcessId: " + order.getProcessId());
                             pstmt.setString(10, order.getProcessId());
                             pstmt.executeQuery();
+
+                            externalTaskService.complete(externalTask);
                         } catch (SQLException e) {
                             LOGGER.error(e.getMessage());
                         } finally {
