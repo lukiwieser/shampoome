@@ -21,6 +21,7 @@ services:
       - 8080:8080
     networks:
       - backend
+      - frontend
     restart: always
 
   recommender-system:
@@ -56,6 +57,15 @@ services:
       - backend
     restart: always
 
+  webclient:
+    build:
+      context: ./frontend/webclient
+      dockerfile: Dockerfile
+    ports:
+      - 4200:80
+    networks:
+      - frontend
+
   mariadb:
     image: mariadb
     environment:
@@ -87,4 +97,6 @@ volumes:
 
 networks:
   backend:
+    driver: bridge
+  frontend:
     driver: bridge
