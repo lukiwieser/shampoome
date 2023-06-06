@@ -1,21 +1,80 @@
-# shampoome
+# ShampooMe
 
-The project consists of multiple projects, one of them is the frontend project while all the other ones take different roles of backend projects. All of the backend projects are written in Java and are Spring Boot applications. The spring projects can be started using the command 'mvn spring-boot:run'.
+ShampooMe is a web-shop for personalized shampoos.
 
-## engine
-This project is the camunda engine. That is where the bpmn process should be deployed using the tenant-id 'shampoome-process'. When deploying the bpmn file itself and the quality-check.form file should be attached to the deployment. That is the core of the whole application.
+This project is a prototype with a focus on the business process. It uses the process management tool [Camunda](https://camunda.com/) as backbone.
 
-## shampooMe_API
-This project is the backend for the frontend project and starts a new process after a user enters it's preferences.
+## Getting Started
 
-## frontend
-It is a single page application written in angular and serves as the only interface for the end user. The frontend communicates only with the shampooMe_API.
+This project requires [Docker](https://www.docker.com/get-started) to be installed. 
 
-## recommender-system
-This is the project containing the external tasks of the recommender-system resource which are responsible for finding the suitable ingredients based on the user preferences as well as a task that persists the order of the user to the database.
+Simply start the project by executing the following command in the project directory:
 
-## delivery
-This is the project containing the external tasks of the delivery resource - update the current delivery status to on_the_way, as well as the delivery task itself as well as the task that updates the status in case of a delay.
+```bash
+docker-compose up
+```
 
-## customer-relations
-This project contains the tasks that set the orderStatus to delivered as well as the persisting of the feedback.
+The main website should then be up and running at `localhost:4200`.
+It may take a few seconds for everything to start.
+
+## Sites
+
+The following sites can be reached:
+
+* `localhost:4200` UI of the Application
+* `localhost:8080` API of the Application
+* `localhost:8081` Process Management Tool aka Camunda (user: `demo`, password: `demo`)
+* `localhost:8082` Database Administration Tool (user: `user`, password: `password`, database: `mydatabase`)
+
+## Process
+
+![process-diagram](docs/process-diagram.png)
+
+Since the process is such an integral part of this project, here is a simplified version. 
+
+The detailed version can be found in the folder `processes`.
+For easier development there is the process `shampoome-process-test.bpmn`, with shorter delays.
+If you want to change the current process, replace the `.bpmn` in `backend/camunda/src/main/resources` with the desired new process.
+
+## Architecture
+
+![architecture-diagram](docs/architecture-diagram.png)
+
+The project is a classic web application, with frontend & backend. It consists of multiple components, and is designed to be distributed i.e. each component can be on a different machine.
+
+All backend components (excluding the database) are Java SpringBoot applications using Maven.
+
+### Webclient
+
+Main UI of the application. `Users` can (1) get a shampoo recommendation, (2) order a shampoo, (3) check the order status, and (4) send feedback.
+
+### Gateway
+
+Provides an HTTP API and is the access point aka gateway to the backend. It handles all requests from the frontend, validates these requests, and routes them to the database and/or camunda.
+
+### Recommender System
+
+Listens on camunda tasks and accordingly (1) determines shampoo ingredients, or (2) saves an order to the database.
+
+### Delivery
+
+Listens on camunda tasks and accordingly (1) update the order status, or (2) simulate that a package is lost 10% of cases.
+
+### Customer Relations
+
+Listens on camunda tasks and accordingly (1) update the order status, or (2) save feedback & KPIs to the database.
+
+### Camunda
+
+Provides a UI for `admins` to see all current process instances, and for managing the quality check.
+It also simulates delays for production & delivery tasks.
+
+### Database
+
+Persists orders and feedback. `mariadb/init.sql` contains a script to initialize the database.
+
+## Credits
+
+This project was created by students as part of a lecture at the Technical University of Vienna.
+
+Nihad Abou-Zid, Sebastian Fürndraht, Tobias Henöckl, Parinaz Momeni Rouchi, Lukas Wieser · 06.06.2023
