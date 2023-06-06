@@ -1,0 +1,102 @@
+version: '3'
+
+services:
+  camunda:
+    build:
+      context: ./backend/camunda
+      dockerfile: Dockerfile
+    ports:
+      - 8081:8081
+    volumes:
+      - camunda-data:/opt/app/db
+    networks:
+      - backend
+    restart: always
+
+  gateway:
+    build:
+      context: ./backend/gateway
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - backend
+      - frontend
+    restart: always
+
+  recommender-system:
+    build:
+      context: ./backend/recommender-system
+      dockerfile: Dockerfile
+    depends_on:
+      camunda:
+        condition: service_healthy
+    networks:
+      - backend
+    restart: always
+
+  delivery:
+    build:
+      context: ./backend/delivery
+      dockerfile: Dockerfile
+    depends_on:
+      camunda:
+        condition: service_healthy
+    networks:
+      - backend
+    restart: always
+
+  customer-relations:
+    build:
+      context: ./backend/customer-relations
+      dockerfile: Dockerfile
+    depends_on:
+      camunda:
+        condition: service_healthy
+    networks:
+      - backend
+    restart: always
+
+  webclient:
+    build:
+      context: ./frontend/webclient
+      dockerfile: Dockerfile
+    ports:
+      - 4200:80
+    networks:
+      - frontend
+
+  mariadb:
+    image: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: password
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - mariadb-data:/var/lib/mysql
+      - ./backend/mariadb/src:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+
+  adminer:
+    image: adminer:latest
+    environment:
+      ADMINER_DEFAULT_SERVER: mariadb
+    ports:
+      - 8082:8080
+    networks:
+      - backend
+    restart: always
+
+volumes:
+  camunda-data:
+  mariadb-data:
+
+networks:
+  backend:
+    driver: bridge
+  frontend:
+    driver: bridge
