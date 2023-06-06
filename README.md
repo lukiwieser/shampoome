@@ -28,9 +28,9 @@ The following sites can be reached:
 
 ## Process
 
-![process-diagram](docs/process-diagram.png)
-
 Since the process is such an integral part of this project, here is a simplified version. 
+
+![process-diagram](docs/process-diagram.png)
 
 The detailed version can be found in the folder `processes`.
 For easier development there is the process `shampoome-process-test.bpmn`, with shorter delays.
