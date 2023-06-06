@@ -1,4 +1,4 @@
-package customer.relations.application;
+package shampoome.customer_relations;
 
 import org.camunda.bpm.client.ExternalTaskClient;
 import org.slf4j.Logger;
@@ -8,15 +8,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @SpringBootApplication
-public class CRClientApplication implements CommandLineRunner {
-    private final static Logger LOGGER = LoggerFactory.getLogger(CRClientApplication.class);
+public class ClientApplication implements CommandLineRunner {
+    private final static Logger LOGGER = LoggerFactory.getLogger(ClientApplication.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(CRClientApplication.class, args);
+        SpringApplication.run(ClientApplication.class, args);
     }
 
     @Override
@@ -24,7 +23,7 @@ public class CRClientApplication implements CommandLineRunner {
         LOGGER.info("starting client...");
 
         ExternalTaskClient client = ExternalTaskClient.create()
-                .baseUrl("http://lva924-server3.ec.tuwien.ac.at:8081/engine-rest")
+                .baseUrl("http://camunda:8081/engine-rest")
                 .asyncResponseTimeout(10000) // long polling timeout
                 .build();
         // subscribe to an external task topic as specified in the process
@@ -37,8 +36,8 @@ public class CRClientApplication implements CommandLineRunner {
                     Connection connection;
 
                     try {
-                        connection = DriverManager.getConnection("jdbc:mariadb://vm40519.cs.easyname.systems:3306/wfm",
-                                "wfmDbAdmin", "i325&GbGjgtdegaS");
+                        connection = DriverManager.getConnection("jdbc:mariadb://mariadb:3306/mydatabase",
+                                "user", "password");
                         PreparedStatement pstmt = null;
                         try {
                             pstmt = connection.prepareStatement("UPDATE Orders SET Status = ?" +
@@ -90,8 +89,8 @@ public class CRClientApplication implements CommandLineRunner {
                     Connection connection;
 
                     try {
-                        connection = DriverManager.getConnection("jdbc:mariadb://vm40519.cs.easyname.systems:3306/wfm",
-                                "wfmDbAdmin", "i325&GbGjgtdegaS");
+                        connection = DriverManager.getConnection("jdbc:mariadb://mariadb:3306/mydatabase",
+                                "user", "password");
                         PreparedStatement pstmt = null;
                         try {
 

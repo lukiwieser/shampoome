@@ -45,6 +45,17 @@ services:
       - backend
     restart: always
 
+  customer-relations:
+    build:
+      context: ./customer-relations
+      dockerfile: Dockerfile
+    depends_on:
+      camunda:
+        condition: service_healthy
+    networks:
+      - backend
+    restart: always
+
   mariadb:
     image: mariadb
     environment:

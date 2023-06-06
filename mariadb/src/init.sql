@@ -10,4 +10,18 @@ CREATE TABLE Orders (
     bottleSize TEXT, # ENUM('S','M','L'),
     isDelayed BOOL,
     description TEXT
-)
+);
+
+CREATE TABLE Feedback
+(
+    Id                    UUID not NULL default UUID() PRIMARY KEY,
+    MatriculationNumber   VARCHAR(8),
+    Name                  VARCHAR(100),
+    OverallSatisfaction   TINYINT,
+    PriceSatisfaction     TINYINT,
+    Comment               TEXT,
+    ProcessStartTime      DATE,
+    ProcessEndTime        DATE,
+    QualityCheckStartTime DATE,
+    QualityCheckEndTime   DATE
+);
