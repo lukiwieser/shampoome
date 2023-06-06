@@ -1,8 +1,8 @@
-package com.shampoome.gateway;
+package shampoome.gateway;
 
-import com.shampoome.gateway.model.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import shampoome.gateway.model.*;
 
 import java.util.*;
 

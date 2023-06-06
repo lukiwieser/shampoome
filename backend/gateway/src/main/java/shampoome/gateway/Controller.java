@@ -1,7 +1,6 @@
-package com.shampoome.gateway;
+package shampoome.gateway;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shampoome.gateway.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -12,6 +11,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
+import shampoome.gateway.model.*;
+
 import java.sql.*;
 
 @RestController

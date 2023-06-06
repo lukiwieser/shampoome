@@ -1,4 +1,4 @@
-package com.shampoome.gateway.model;
+package shampoome.gateway.model;
 
 public class ProcessIdResponse {
     public ProcessIdResponse(String processId) {

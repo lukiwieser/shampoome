@@ -1,4 +1,4 @@
-package com.shampoome.gateway.model;
+package shampoome.gateway.model;
 
 public class ProcessVariable<T> {
     public EmbeddedValue name;

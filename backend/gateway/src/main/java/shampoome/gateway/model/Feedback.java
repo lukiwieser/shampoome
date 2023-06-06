@@ -1,4 +1,4 @@
-package com.shampoome.gateway.model;
+package shampoome.gateway.model;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
