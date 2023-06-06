@@ -7,7 +7,7 @@ CREATE TABLE Orders (
     Price DECIMAL,
     processId TEXT,
     Status ENUM('order_placed','on_the_way','delivered'),
-    bottleSize TEXT, # ENUM('S','M','L'),
+    bottleSize ENUM('S','M','L'),
     isDelayed BOOL,
     description TEXT
 );

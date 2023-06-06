@@ -216,7 +216,7 @@ public class ClientApplication implements CommandLineRunner {
                     LOGGER.info("order price: " + order.getPrice());
                     order.setStatus("order_placed");
                     LOGGER.info("order status: " + order.getStatus());
-                    order.setBottleSize(externalTask.getVariable("bottleSizeActual"));
+                    order.setBottleSize(externalTask.getVariable("bottleSize"));
                     LOGGER.info("order bottleSize: " + order.getBottleSize());
                     order.setDelayed(false);
                     LOGGER.info("order delayed: " + order.isDelayed());
