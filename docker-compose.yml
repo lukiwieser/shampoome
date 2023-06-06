@@ -3,7 +3,7 @@ version: '3'
 services:
   camunda:
     build:
-      context: ./camunda
+      context: ./backend/camunda
       dockerfile: Dockerfile
     ports:
       - 8081:8081
@@ -15,7 +15,7 @@ services:
 
   gateway:
     build:
-      context: ./gateway
+      context: ./backend/gateway
       dockerfile: Dockerfile
     ports:
       - 8080:8080
@@ -25,7 +25,7 @@ services:
 
   recommender-system:
     build:
-      context: ./recommender-system
+      context: ./backend/recommender-system
       dockerfile: Dockerfile
     depends_on:
       camunda:
@@ -36,7 +36,7 @@ services:
 
   delivery:
     build:
-      context: ./delivery
+      context: ./backend/delivery
       dockerfile: Dockerfile
     depends_on:
       camunda:
@@ -47,7 +47,7 @@ services:
 
   customer-relations:
     build:
-      context: ./customer-relations
+      context: ./backend/customer-relations
       dockerfile: Dockerfile
     depends_on:
       camunda:
@@ -65,7 +65,7 @@ services:
       MYSQL_PASSWORD: password
     volumes:
       - mariadb-data:/var/lib/mysql
-      - ./mariadb/src:/docker-entrypoint-initdb.d
+      - ./backend/mariadb/src:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
     networks:
