@@ -1,0 +1,19 @@
+{
+  "components": [
+    {
+      "label": "Pass Quality Check?",
+      "type": "checkbox",
+      "id": "Field_14ut7yn",
+      "key": "isQualityOk"
+    }
+  ],
+  "type": "default",
+  "id": "quality-check-form",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}
