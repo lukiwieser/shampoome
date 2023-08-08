@@ -75,6 +75,6 @@ Persists orders and feedback. `mariadb/init.sql` contains a script to initialize
 
 ## Credits
 
-This project was created by students as part of a lecture at the Technical University of Vienna.
+This project was created by students as part of a lecture at the *Vienna University of Technology*.
 
 Nihad Abou-Zid, Sebastian Fürndraht, Tobias Henöckl, Parinaz Momeni Rouchi, Lukas Wieser · 06.06.2023
