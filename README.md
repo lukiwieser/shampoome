@@ -2,7 +2,8 @@
 
 ShampooMe is a web-shop for personalized shampoos.
 
-This project is a prototype with a focus on the business process. It uses the process management tool [Camunda](https://camunda.com/) as backbone.
+This project is a prototype focused on the business process of ordering a personalized shampoo. 
+It uses the process management tool [Camunda](https://camunda.com/) as its backbone.
 
 ## Getting Started
 
@@ -28,7 +29,7 @@ The following sites can be reached:
 
 ## Process
 
-Since the process is such an integral part of this project, here is a simplified version. 
+Since the process is such an integral part of this project, here is a simplified version: 
 
 ![process-diagram](docs/process-diagram.png)
 
