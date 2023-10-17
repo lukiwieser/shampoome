@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { MainService } from 'src/app/services/main.service';
@@ -14,7 +14,7 @@ import { OrderReq } from 'src/app/entities/order-req';
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
   formSubmitted : Boolean = false;
   processId! : string | null;
   shampooDetails! : ShampooDetails;
@@ -25,7 +25,7 @@ export class OrderComponent implements OnInit {
     private titleService: Title,
     private mainService: MainService,
     private router: Router,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     public ss: StringifyService
     ) { 
       this.titleService.setTitle("Order | ShampooMe");

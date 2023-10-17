@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { PreferencesReq } from 'src/app/entities/preferences-req';
@@ -12,11 +12,11 @@ import { StringifyService } from 'src/app/services/stringify.service';
   styleUrls: ['./quiz.component.scss']
 })
 export class QuizComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
   formSubmitted : Boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private titleSerivce: Title,
     private mainService: MainService,
     private router: Router,

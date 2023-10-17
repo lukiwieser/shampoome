@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { FeedbackReq } from 'src/app/entities/feedback-req';
@@ -12,13 +12,13 @@ import { MainService } from 'src/app/services/main.service';
 })
 export class FeedbackComponent implements OnInit {
   processId! : String | null;
-  form: FormGroup;
+  form: UntypedFormGroup;
   formSubmitted : Boolean = false;
   formSubmittedSuccessfully : Boolean = false
 
   constructor(
     private titleService: Title,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private mainService: MainService,
     private route: ActivatedRoute,
   ) {
