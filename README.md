@@ -29,7 +29,15 @@ The following sites can be reached:
 
 ## Process
 
-Since the process is such an integral part of this project, here is a simplified version: 
+The process is an integral part of the project.
+Since this is just a prototype, the whole process is simply simulated, and no real shampoo is produced.
+
+Here is a short overview:
+1. Recommend a shampoo (based on preferences the user has)
+2. Produce shampoo (this is simulated with a delay)
+3. Check Quality (this is done manually via a Camunda Form)
+4. Ship shampoo (also simulated with a delay and there is a random chance of a delivery error)
+5. Get feedback from the user (optional)
 
 ![process-diagram](docs/process-diagram.png)
 
