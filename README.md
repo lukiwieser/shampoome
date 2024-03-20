@@ -36,14 +36,14 @@ Here is a short overview:
 1. Recommend a shampoo (based on preferences the user has)
 2. Produce shampoo (this is simulated with a delay)
 3. Check Quality (this is done manually via a Camunda Form)
-4. Ship shampoo (also simulated with a delay and there is a random chance of a delivery error)
+4. Deliver shampoo (also simulated with a delay and there is a random chance of a delivery error)
 5. Get feedback from the user (optional)
 
 ![process-diagram](docs/process-diagram.png)
 
 The detailed version can be found in the folder `processes`.
 For easier development there is the process `shampoome-process-test.bpmn`, with shorter delays.
-If you want to change the current process, replace the `.bpmn` in `backend/camunda/src/main/resources` with the desired new process.
+If you want to change the current process, replace the `.bpmn` in `backend/camunda/src/main/resources` with the desired process.
 
 ## Architecture
 
